@@ -29,16 +29,37 @@
         --muted: 328 100% 97%;
         --muted-foreground: 240 3.8% 46.1%;
 
-        --accent: 328 100% 97%;
-        --accent-foreground: 240 5.9% 10%;
+        --accent: 328 63% 39%;
+        --accent-foreground: 0 0% 98%;
 
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
 
         --border: 20 5.9% 90%;
         --input: 0 0% 90%;
-        --ring: 24.6 95% 53.1%;
+        --ring: 328 68% 51%;
         --radius: 15px;
+    }
+    * {
+        font-family: var(--font-nunito), sans-serif;
+    }
+
+    .scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+        border-radius: 6px;
+        background: #fff;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        background: #dbdadd;
+        border-radius: 6px;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #dbdadd;
     }
 
     @layer utilities {
