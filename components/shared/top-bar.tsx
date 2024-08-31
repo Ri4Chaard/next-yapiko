@@ -13,7 +13,6 @@ import {
     navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
 import Image from "next/image";
-import Link from "next/link";
 import { SearchBar } from "./search-bar";
 
 interface Props {
@@ -23,34 +22,75 @@ interface Props {
 export const TopBar: React.FC<Props> = ({ className }) => {
     const categories: {
         name: string;
-        subcategories: { name: string; icon: string }[];
+        link: string;
+        subcategories: { name: string; subLink: string; icon: string }[];
     }[] = [
         {
             name: "Суши",
+            link: "sushi",
             subcategories: [
-                { name: "Суши", icon: "/assets/icons/sushi.svg" },
-                { name: "Роли", icon: "/assets/icons/sushi.svg" },
-                { name: "Royal", icon: "/assets/icons/sushi.svg" },
-                { name: "Сети", icon: "/assets/icons/sushi.svg" },
+                {
+                    name: "Суши",
+                    subLink: "sushi",
+                    icon: "/assets/icons/sushi.svg",
+                },
+                {
+                    name: "Роли",
+                    subLink: "rolls",
+                    icon: "/assets/icons/sushi.svg",
+                },
+                {
+                    name: "Royal",
+                    subLink: "royal",
+                    icon: "/assets/icons/sushi.svg",
+                },
+                {
+                    name: "Сети",
+                    subLink: "sets",
+                    icon: "/assets/icons/sushi.svg",
+                },
             ],
         },
         {
             name: "Піца",
+            link: "pizza",
             subcategories: [
-                { name: "Кругла", icon: "/assets/icons/sushi.svg" },
-                { name: "Party піца", icon: "/assets/icons/sushi.svg" },
+                {
+                    name: "Кругла",
+                    subLink: "round",
+                    icon: "/assets/icons/sushi.svg",
+                },
+                {
+                    name: "Party піца",
+                    subLink: "party",
+                    icon: "/assets/icons/sushi.svg",
+                },
             ],
         },
         {
             name: "Бургери",
+            link: "burgers",
             subcategories: [],
         },
         {
             name: "Гаряче",
+            link: "hot-dishes",
             subcategories: [
-                { name: "WOK", icon: "/assets/icons/sushi.svg" },
-                { name: "Супи", icon: "/assets/icons/sushi.svg" },
-                { name: "Пасти", icon: "/assets/icons/sushi.svg" },
+                {
+                    name: "WOK",
+                    subLink: "wok",
+                    icon: "/assets/icons/sushi.svg",
+                },
+                {
+                    name: "Супи",
+                    subLink: "soup",
+                    icon: "/assets/icons/sushi.svg",
+                },
+                {
+                    name: "Пасти",
+                    subLink: "pasta",
+                    icon: "/assets/icons/sushi.svg",
+                },
             ],
         },
     ];
@@ -70,6 +110,7 @@ export const TopBar: React.FC<Props> = ({ className }) => {
                                         {category.subcategories?.map(
                                             (subcategory) => (
                                                 <NavigationMenuLink
+                                                    href={`/${category.link}/${subcategory.subLink}`}
                                                     key={subcategory.name}
                                                 >
                                                     <div className="flex flex-col items-center">
@@ -89,17 +130,16 @@ export const TopBar: React.FC<Props> = ({ className }) => {
                                     </NavigationMenuContent>
                                 </NavigationMenuItem>
                             ) : (
-                                <NavigationMenuItem>
-                                    <Link href="/" legacyBehavior passHref>
-                                        <NavigationMenuLink
-                                            className={cn(
-                                                navigationMenuTriggerStyle(),
-                                                "h-12"
-                                            )}
-                                        >
-                                            {category.name}
-                                        </NavigationMenuLink>
-                                    </Link>
+                                <NavigationMenuItem key={index}>
+                                    <NavigationMenuLink
+                                        href={`/${category.link}`}
+                                        className={cn(
+                                            navigationMenuTriggerStyle(),
+                                            "h-12"
+                                        )}
+                                    >
+                                        {category.name}
+                                    </NavigationMenuLink>
                                 </NavigationMenuItem>
                             )
                         )}

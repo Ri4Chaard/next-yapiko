@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import "./globals.css";
 import { Nunito } from "next/font/google";
 
@@ -7,10 +6,6 @@ const nunito = Nunito({
     variable: "--font-nunito",
     weight: ["400", "500", "600", "700", "800", "900"],
 });
-
-export const metadata: Metadata = {
-    title: "Next Yapiko | Головна",
-};
 
 export default function RootLayout({
     children,

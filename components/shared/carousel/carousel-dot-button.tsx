@@ -21,6 +21,7 @@ export const useDotButton = (
         (index: number) => {
             if (!emblaApi) return;
             emblaApi.scrollTo(index);
+            autoplay?.reset();
         },
         [emblaApi]
     );
@@ -31,7 +32,6 @@ export const useDotButton = (
 
     const onSelect = React.useCallback((emblaApi: EmblaCarouselType) => {
         setSelectedIndex(emblaApi.selectedScrollSnap());
-        autoplay?.reset();
     }, []);
 
     React.useEffect(() => {

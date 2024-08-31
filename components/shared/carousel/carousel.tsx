@@ -53,7 +53,10 @@ export const Carousel: React.FC<Props> = ({ className }) => {
                 <div ref={emblaRef} className="overflow-hidden">
                     <div className="flex">
                         {slides.map((slide, index) => (
-                            <div className="flex items-center justify-center rounded-md flex-shrink-0 flex-grow-0 basis-[80%] h-[400px]">
+                            <div
+                                className="flex items-center justify-center rounded-md flex-shrink-0 flex-grow-0 basis-[80%] h-[400px]"
+                                key={index}
+                            >
                                 <img
                                     className="rounded-md border-[14px] border-secondary w-[90%]"
                                     src={slide}
