@@ -4,8 +4,16 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Title } from "./title";
-import { ChevronDown, Plus } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Plus } from "lucide-react";
+
+import { GroupVariants } from "./group-variants";
+import {
+    PizzaBorder,
+    pizzaBorders,
+    PizzaSize,
+    pizzaSizes,
+} from "@/constants/pizza";
+import { GroupSelectVariants } from "./group-select-variants";
 
 interface Props {
     imageUrl: string;
@@ -22,29 +30,8 @@ export const PizzaCard: React.FC<Props> = ({
     price,
     className,
 }) => {
-    const [pizzaSize, setPizzaSize] = React.useState<32 | 42>(32);
-    const [pizzaBorder, setPizzaBorder] = React.useState<1 | 2 | 3>(1);
-
-    const mapPizzaSizes = {
-        32: "32 см",
-        42: "42 см",
-    } as const;
-    const mapPizzaBorders = {
-        1: "Борт-Без начинки",
-        2: "Сирний бортик",
-        3: "М'ясний бортик",
-    };
-
-    const pizzaSizes = Object.entries(mapPizzaSizes).map(([value, name]) => ({
-        name,
-        value,
-    }));
-    const pizzaBorders = Object.entries(mapPizzaBorders).map(
-        ([value, name]) => ({
-            name,
-            value,
-        })
-    );
+    const [pizzaSize, setPizzaSize] = React.useState<PizzaSize>(32);
+    const [pizzaBorder, setPizzaBorder] = React.useState<PizzaBorder>(1);
 
     return (
         <div className={cn("relative w-[450px]", className)}>
@@ -60,67 +47,23 @@ export const PizzaCard: React.FC<Props> = ({
                             className="hover:text-salad transition-colors mb-2"
                         />
                     </Link>
-                    {/* Привести часть компонента в порядок, Popover заменить selectjm */}
-                    {/* https://ui.shadcn.com/docs/components/select */}
+
                     <div className="flex justify-between text-sm">
-                        <div className="bg-white rounded-[8px] text-black">
-                            {pizzaSizes.map((size) => (
-                                <button
-                                    key={size.value}
-                                    className={cn(
-                                        "py-1 px-3 h-full transition-colors rounded-[8px]",
-                                        {
-                                            "bg-salad":
-                                                pizzaSize ===
-                                                Number(size.value),
-                                        }
-                                    )}
-                                    onClick={() =>
-                                        setPizzaSize(
-                                            Number(
-                                                size.value
-                                            ) as typeof pizzaSize
-                                        )
-                                    }
-                                >
-                                    {size.name}
-                                </button>
-                            ))}
-                        </div>
-                        <Popover>
-                            <PopoverTrigger asChild>
-                                <button className="w-[169px] flex items-center justify-between mr-6 py-1 px-3  bg-white rounded-[8px] text-black">
-                                    {mapPizzaBorders[pizzaBorder]}
-                                    <ChevronDown width={18} />
-                                </button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0 rounded-[8px]">
-                                <div className="flex flex-col">
-                                    {pizzaBorders.map((border) => (
-                                        <button
-                                            key={border.value}
-                                            onClick={() =>
-                                                setPizzaBorder(
-                                                    Number(
-                                                        border.value
-                                                    ) as typeof pizzaBorder
-                                                )
-                                            }
-                                            className={cn(
-                                                "py-1 px-3 w-full text-start transition-colors rounded-[8px]",
-                                                {
-                                                    "bg-salad":
-                                                        pizzaBorder ===
-                                                        Number(border.value),
-                                                }
-                                            )}
-                                        >
-                                            {border.name}
-                                        </button>
-                                    ))}
-                                </div>
-                            </PopoverContent>
-                        </Popover>
+                        <GroupVariants
+                            items={pizzaSizes}
+                            value={String(pizzaSize)}
+                            onClick={(value) =>
+                                setPizzaSize(Number(value) as PizzaSize)
+                            }
+                        />
+
+                        <GroupSelectVariants
+                            items={pizzaBorders}
+                            value={String(pizzaBorder)}
+                            onChange={(value) =>
+                                setPizzaBorder(Number(value) as PizzaBorder)
+                            }
+                        />
                     </div>
                 </div>
                 <div className="flex flex-col self-end">
