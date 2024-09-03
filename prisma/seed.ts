@@ -1,10 +1,4 @@
-import {
-    categories,
-    _ingredients,
-    products,
-    productItems,
-    extraIngredients,
-} from "./constants";
+import { categories, products, productItems, subcategories } from "./constants";
 import { prisma } from "./prisma-client";
 import { hashSync } from "bcrypt";
 
@@ -31,90 +25,8 @@ async function up() {
         data: categories,
     });
 
-    //create по одному
-    await prisma.ingredient.createMany({
-        data: [
-            {
-                name: "Норі",
-                imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            },
-            {
-                name: "Омлет",
-                imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            },
-            {
-                name: "Рис",
-                imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            },
-            {
-                name: "Сир філадельфія",
-                imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            },
-            {
-                name: "Соус унагі",
-                imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            },
-            {
-                name: "Сухарі панко",
-                imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            },
-            {
-                name: "Тунець",
-                imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            },
-            {
-                name: "Огірок",
-                imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            },
-            {
-                name: "Окунь копчений",
-                imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            },
-            {
-                name: "Сир чеддер",
-                imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            },
-            {
-                name: "Майонез",
-                imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            },
-        ],
-    });
-
-    const ingredientUpdates = [
-        { name: "Норі", categories: [1], subcategories: [2] },
-        { name: "Омлет", categories: [1], subcategories: [2] },
-        { name: "Рис", categories: [1], subcategories: [2] },
-        { name: "Сир філадельфія", categories: [1], subcategories: [2] },
-        { name: "Соус унагі", categories: [1], subcategories: [2] },
-        { name: "Сухарі панко", categories: [1], subcategories: [2] },
-        { name: "Тунець", categories: [1], subcategories: [2] },
-        { name: "Огірок", categories: [1], subcategories: [2] },
-        { name: "Окунь копчений", categories: [1], subcategories: [2] },
-        { name: "Сир чеддер", categories: [1, 2], subcategories: [2, 5] },
-        { name: "Майонез", categories: [1], subcategories: [2] },
-    ];
-
-    for (const { name, categories, subcategories } of ingredientUpdates) {
-        const ingredient = await prisma.ingredient.findFirst({
-            where: { name },
-        });
-
-        if (ingredient) {
-            await prisma.ingredient.update({
-                where: { id: ingredient.id },
-                data: {
-                    categories: { connect: categories.map((id) => ({ id })) },
-                    subcategories: {
-                        connect: subcategories.map((id) => ({ id })),
-                    },
-                },
-            });
-        }
-    }
-
-    await prisma.extraIngredient.createMany({
-        data: extraIngredients,
+    await prisma.subcategory.createMany({
+        data: subcategories,
     });
 
     await prisma.product.createMany({
@@ -123,6 +35,158 @@ async function up() {
 
     await prisma.productItem.createMany({
         data: productItems,
+    });
+
+    //Основні інгредієнти
+    await prisma.ingredient.create({
+        data: {
+            name: "Норі",
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            categories: { connect: [{ id: 1 }] },
+            subcategories: { connect: [{ id: 2 }] },
+            products: { connect: [{ id: 2 }, { id: 3 }] },
+        },
+    });
+
+    await prisma.ingredient.create({
+        data: {
+            name: "Омлет",
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            categories: { connect: [{ id: 1 }] },
+            subcategories: { connect: [{ id: 2 }] },
+            products: { connect: [{ id: 2 }] },
+        },
+    });
+    await prisma.ingredient.create({
+        data: {
+            name: "Рис",
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            categories: { connect: [{ id: 1 }] },
+            subcategories: { connect: [{ id: 2 }] },
+            products: { connect: [{ id: 2 }, { id: 3 }] },
+        },
+    });
+    await prisma.ingredient.create({
+        data: {
+            name: "Сир філадельфія",
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            categories: { connect: [{ id: 1 }] },
+            subcategories: { connect: [{ id: 2 }] },
+            products: { connect: [{ id: 2 }, { id: 3 }] },
+        },
+    });
+    await prisma.ingredient.create({
+        data: {
+            name: "Соус унагі",
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            categories: { connect: [{ id: 1 }] },
+            subcategories: { connect: [{ id: 2 }] },
+            products: { connect: [{ id: 2 }, { id: 3 }] },
+        },
+    });
+    await prisma.ingredient.create({
+        data: {
+            name: "Сухарі панко",
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            categories: { connect: [{ id: 1 }] },
+            subcategories: { connect: [{ id: 2 }] },
+            products: { connect: [{ id: 2 }, { id: 3 }] },
+        },
+    });
+    await prisma.ingredient.create({
+        data: {
+            name: "Тунець",
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            categories: { connect: [{ id: 1 }] },
+            subcategories: { connect: [{ id: 2 }] },
+            products: { connect: [{ id: 2 }] },
+        },
+    });
+    await prisma.ingredient.create({
+        data: {
+            name: "Огірок",
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            categories: { connect: [{ id: 1 }] },
+            subcategories: { connect: [{ id: 2 }] },
+            products: { connect: [{ id: 3 }] },
+        },
+    });
+    await prisma.ingredient.create({
+        data: {
+            name: "Окунь копчений",
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            categories: { connect: [{ id: 1 }] },
+            subcategories: { connect: [{ id: 2 }] },
+            products: { connect: [{ id: 3 }] },
+        },
+    });
+    await prisma.ingredient.create({
+        data: {
+            name: "Сир чеддер",
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            categories: { connect: [{ id: 1 }, { id: 2 }] },
+            subcategories: { connect: [{ id: 2 }, { id: 5 }] },
+            products: { connect: [{ id: 3 }, { id: 5 }] },
+        },
+    });
+    await prisma.ingredient.create({
+        data: {
+            name: "Майонез",
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            categories: { connect: [{ id: 1 }] },
+            subcategories: { connect: [{ id: 2 }] },
+            products: { connect: [{ id: 3 }] },
+        },
+    });
+
+    //Додаткові інгредієнти
+    await prisma.extraIngredient.create({
+        data: {
+            name: "Соус теріякі",
+            price: 20,
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            products: { connect: [{ id: 5 }, { id: 6 }] },
+        },
+    });
+    await prisma.extraIngredient.create({
+        data: {
+            name: "Соус спайсі",
+            price: 25,
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            products: { connect: [{ id: 5 }] },
+        },
+    });
+    await prisma.extraIngredient.create({
+        data: {
+            name: "Додатковий сир",
+            price: 30,
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            products: { connect: [{ id: 6 }] },
+        },
+    });
+    await prisma.extraIngredient.create({
+        data: {
+            name: "Креветки",
+            price: 40,
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            products: { connect: [{ id: 5 }, { id: 6 }] },
+        },
+    });
+    await prisma.extraIngredient.create({
+        data: {
+            name: "Гриби",
+            price: 15,
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            products: { connect: [{ id: 5 }] },
+        },
+    });
+    await prisma.extraIngredient.create({
+        data: {
+            name: "Бекон",
+            price: 35,
+            imageUrl: "/assets/images/ingredients/_1__2_7.webp",
+            products: { connect: [{ id: 6 }] },
+        },
     });
 
     await prisma.cart.createMany({
@@ -142,7 +206,7 @@ async function up() {
 
     await prisma.cartItem.create({
         data: {
-            productItemId: 1,
+            productItemId: 5,
             cartId: 1,
             quantity: 2,
             extraIngredients: {

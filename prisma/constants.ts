@@ -80,75 +80,6 @@ export const subcategories = [
     },
 ];
 
-export const _ingredients = [
-    {
-        name: "Норі",
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        categories: [{ id: 1 }],
-        subcategories: [{ id: 2 }],
-    },
-    {
-        name: "Омлет",
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        categories: [{ id: 1 }],
-        subcategories: [{ id: 2 }],
-    },
-    {
-        name: "Рис",
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        categories: [{ id: 1 }],
-        subcategories: [{ id: 2 }],
-    },
-    {
-        name: "Сир філадельфія",
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        categories: [{ id: 1 }],
-        subcategories: [{ id: 2 }],
-    },
-    {
-        name: "Соус унагі",
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        categories: [{ id: 1 }],
-        subcategories: [{ id: 2 }],
-    },
-    {
-        name: "Сухарі панко",
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        categories: [{ id: 1 }],
-        subcategories: [{ id: 2 }],
-    },
-    {
-        name: "Тунець",
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        categories: [{ id: 1 }],
-        subcategories: [{ id: 2 }],
-    },
-    {
-        name: "Огірок",
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        categories: [{ id: 1 }],
-        subcategories: [{ id: 2 }],
-    },
-    {
-        name: "Окунь копчений",
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        categories: [{ id: 1 }],
-        subcategories: [{ id: 2 }],
-    },
-    {
-        name: "Сир чеддер",
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        categories: [{ id: 1 }, { id: 2 }],
-        subcategories: [{ id: 2 }, { id: 5 }],
-    },
-    {
-        name: "Майонез",
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        categories: [{ id: 1 }],
-        subcategories: [{ id: 2 }],
-    },
-];
-
 export const products = [
     {
         name: "Суші з тунцем",
@@ -187,7 +118,7 @@ export const products = [
         subcategoryId: 5,
     },
     {
-        name: "Кругла кватерона",
+        name: "Піца кватерона",
         imageUrl: "/assets/images/products/kvaterona.webp",
         description: "Піца з томатами та сиром.",
         categoryId: 2,
@@ -239,43 +170,4 @@ export const productItems = [
     { price: 120, productId: 7 },
     { price: 100, productId: 8 },
     { price: 100, productId: 9 },
-];
-
-export const extraIngredients = [
-    {
-        name: "Соус теріякі",
-        price: 20,
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        products: [{ id: 4 }, { id: 5 }],
-    },
-    {
-        name: "Соус спайсі",
-        price: 25,
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        products: [{ id: 4 }],
-    },
-    {
-        name: "Додатковий сир",
-        price: 30,
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        products: [{ id: 5 }],
-    },
-    {
-        name: "Креветки",
-        price: 40,
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        products: [{ id: 4 }, { id: 5 }],
-    },
-    {
-        name: "Гриби",
-        price: 15,
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        products: [{ id: 4 }],
-    },
-    {
-        name: "Бекон",
-        price: 35,
-        imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-        products: [{ id: 5 }],
-    },
 ];
