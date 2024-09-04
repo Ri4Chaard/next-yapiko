@@ -32,6 +32,7 @@ model Category{
     id              Int         @id @default(autoincrement())
 
     name            String
+    link            String
 
     subcategories   Subcategory[]
     products        Product[]
@@ -45,6 +46,7 @@ model Subcategory{
     id              Int         @id @default(autoincrement())
 
     name            String
+    link            String
     imageUrl        String
 
     products        Product[]

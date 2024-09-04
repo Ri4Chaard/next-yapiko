@@ -1,10 +1,9 @@
 import { Metadata } from "next";
 import { Header } from "@/components/shared/header";
-import { TopBar } from "@/components/shared/top-bar";
 import { ProductsMenu } from "@/components/shared/products-menu";
 
 export const metadata: Metadata = {
-    title: "Next Yapiko | Головна",
+    title: "Next Yapiko | Продукти",
 };
 
 export default function RootLayout({
@@ -15,9 +14,8 @@ export default function RootLayout({
     return (
         <main>
             <Header />
-            <TopBar />
 
-            <ProductsMenu>{children}</ProductsMenu>
+            {children}
         </main>
     );
 }

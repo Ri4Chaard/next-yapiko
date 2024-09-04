@@ -1,24 +1,31 @@
-"use client";
-
 import React from "react";
 import { Container } from "./container";
 import { Title } from "./title";
-import { useParams } from "next/navigation";
 import { Filters } from "./filters";
+import { Product } from "@prisma/client";
+import { ProductList } from "./product-list";
 
 interface Props {
-    children: React.ReactNode;
+    category: string;
+    subcategory?: string;
+    cards: Product[];
+    className?: string;
 }
 
-export const ProductsMenu: React.FC<Props> = ({ children }) => {
-    const { subcategory } = useParams();
-
-    console.log(subcategory);
-
+export const ProductsMenu: React.FC<Props> = ({
+    category,
+    subcategory,
+    cards,
+    className,
+}) => {
     return (
-        <Container>
+        <Container className={className}>
             <Title
-                text={String(subcategory).toUpperCase()}
+                text={
+                    subcategory && subcategory.length > 0
+                        ? subcategory.toUpperCase()
+                        : category.toUpperCase()
+                }
                 size="xl"
                 className="mt-3 font-bold"
             />
@@ -26,7 +33,9 @@ export const ProductsMenu: React.FC<Props> = ({ children }) => {
                 <div className="w-[250px]">
                     <Filters />
                 </div>
-                <div className="flex-1">{children}</div>
+                <div className="flex-1">
+                    <ProductList cards={cards} />
+                </div>
             </div>
         </Container>
     );
