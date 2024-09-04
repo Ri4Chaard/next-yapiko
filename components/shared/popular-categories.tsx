@@ -18,8 +18,7 @@ export const PopularCategories: React.FC<Props> = ({ className }) => {
             <div className="mt-5 grid grid-cols-7 gap-10 justify-items-center items-center ">
                 <div className="w-full h-[350px] hover:scale-[105%] hover:rotate-1 transition-all col-span-3">
                     <CategoryCard
-                        className=""
-                        href="/pizza"
+                        href="/pizza/round"
                         image="https://yapiko.com.ua/media/catalog/product/cache/eef5449ab1be0e676ed6197c8f656f61/f/i/file_35_6.webp"
                         name="Кругла піца"
                         price={159}
@@ -27,7 +26,7 @@ export const PopularCategories: React.FC<Props> = ({ className }) => {
                 </div>
                 <div className="w-full h-[350px] hover:scale-[105%] hover:rotate-1 transition-all col-span-2">
                     <CategoryCard
-                        href="/soup"
+                        href="/hot-dishes/soup"
                         image="https://yapiko.com.ua/media/catalog/product/cache/eef5449ab1be0e676ed6197c8f656f61/f/i/file_37_1.webp"
                         name="Супи"
                         price={99}
@@ -35,7 +34,7 @@ export const PopularCategories: React.FC<Props> = ({ className }) => {
                 </div>
                 <div className="w-full h-[350px] hover:scale-[105%] hover:rotate-1 transition-all col-span-2">
                     <CategoryCard
-                        href="/soup"
+                        href="/hot-dishes/wok"
                         image="https://yapiko.com.ua/media/catalog/product/cache/eef5449ab1be0e676ed6197c8f656f61/2/-/2-100_31__1.webp"
                         name="WOK"
                         price={129}
@@ -43,7 +42,7 @@ export const PopularCategories: React.FC<Props> = ({ className }) => {
                 </div>
                 <div className="w-full h-[350px] hover:scale-[105%] hover:rotate-1 transition-all col-span-3">
                     <CategoryCard
-                        href="/pasta"
+                        href="/hot-dishes/noodles"
                         image="https://yapiko.com.ua/media/catalog/product/cache/eef5449ab1be0e676ed6197c8f656f61/f/i/file_291_1.webp"
                         name="Пасти"
                         price={175}
@@ -51,7 +50,7 @@ export const PopularCategories: React.FC<Props> = ({ className }) => {
                 </div>
                 <div className="w-full h-[350px] hover:scale-[105%] hover:rotate-1 transition-all col-span-4">
                     <CategoryCard
-                        href="/set"
+                        href="/sushi/set"
                         image="https://yapiko.com.ua/media/catalog/product/cache/eef5449ab1be0e676ed6197c8f656f61/6/_/6.webp"
                         name="Сети"
                         price={359}

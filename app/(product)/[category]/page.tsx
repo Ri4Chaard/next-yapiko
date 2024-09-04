@@ -1,6 +1,8 @@
 import { ProductsMenu } from "@/components/shared/products-menu";
 import { TopBar } from "@/components/shared/top-bar";
 import { prisma } from "@/prisma/prisma-client";
+import { Api } from "@/services/api-client";
+import { notFound } from "next/navigation";
 
 export default async function CategoryPage({
     params,
@@ -15,6 +17,12 @@ export default async function CategoryPage({
     const category = await prisma.category.findFirst({
         where: { link: params.category },
     });
+
+    if (!category) {
+        return notFound();
+    }
+
+    //TODO: Продукты брать по фильтрам, вынести в отдельную фунуцию
 
     // Получение продуктов по категории и подкатегории
     const products = await prisma.product.findMany({
@@ -33,7 +41,7 @@ export default async function CategoryPage({
             <TopBar categories={categories} />
             <ProductsMenu
                 category={category ? category.name : ""}
-                cards={products}
+                products={products}
             />
         </>
     );

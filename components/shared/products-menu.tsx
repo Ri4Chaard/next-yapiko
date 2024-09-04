@@ -2,20 +2,20 @@ import React from "react";
 import { Container } from "./container";
 import { Title } from "./title";
 import { Filters } from "./filters";
-import { Product } from "@prisma/client";
 import { ProductList } from "./product-list";
+import { ProductsWithRealtions } from "@/@types/prisma";
 
 interface Props {
     category: string;
     subcategory?: string;
-    cards: Product[];
+    products: ProductsWithRealtions[];
     className?: string;
 }
 
 export const ProductsMenu: React.FC<Props> = ({
     category,
     subcategory,
-    cards,
+    products,
     className,
 }) => {
     return (
@@ -34,7 +34,12 @@ export const ProductsMenu: React.FC<Props> = ({
                     <Filters />
                 </div>
                 <div className="flex-1">
-                    <ProductList cards={cards} />
+                    {products && (
+                        <ProductList
+                            subcategory={subcategory || ""}
+                            products={products}
+                        />
+                    )}
                 </div>
             </div>
         </Container>

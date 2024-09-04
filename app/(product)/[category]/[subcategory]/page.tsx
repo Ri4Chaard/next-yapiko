@@ -1,6 +1,8 @@
+import { ProductsWithRealtions } from "@/@types/prisma";
 import { ProductsMenu } from "@/components/shared/products-menu";
 import { TopBar } from "@/components/shared/top-bar";
 import { prisma } from "@/prisma/prisma-client";
+import { notFound } from "next/navigation";
 
 export default async function SubcategoryPage({
     params,
@@ -15,6 +17,10 @@ export default async function SubcategoryPage({
     const category = await prisma.category.findFirst({
         where: { link: params.category },
     });
+
+    if (!category) {
+        return notFound();
+    }
 
     // Найти подкатегорию по ссылке и ID категории
     const subcategory = await prisma.subcategory.findFirst({
@@ -40,7 +46,7 @@ export default async function SubcategoryPage({
             <ProductsMenu
                 category={category ? category.name : ""}
                 subcategory={subcategory ? subcategory.name : ""}
-                cards={products}
+                products={products}
             />
         </>
     );
