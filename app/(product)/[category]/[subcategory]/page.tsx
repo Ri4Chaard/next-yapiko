@@ -1,44 +1,28 @@
-import { ProductsWithRealtions } from "@/@types/prisma";
 import { ProductsMenu } from "@/components/shared/products-menu";
 import { TopBar } from "@/components/shared/top-bar";
+import { findMenu, GetParams, GetSearchParams } from "@/lib/findMenu";
 import { prisma } from "@/prisma/prisma-client";
 import { notFound } from "next/navigation";
 
 export default async function SubcategoryPage({
     params,
+    searchParams,
 }: {
-    params: { category: string; subcategory: string };
+    params: GetParams;
+    searchParams: GetSearchParams;
 }) {
     const categories = await prisma.category.findMany({
-        include: { ingredients: true, subcategories: true },
+        include: { subcategories: true },
     });
 
-    // Найти категорию по ссылке
-    const category = await prisma.category.findFirst({
-        where: { link: params.category },
-    });
+    const { products, category, subcategory } = await findMenu(
+        params,
+        searchParams
+    );
 
     if (!category) {
         return notFound();
     }
-
-    // Найти подкатегорию по ссылке и ID категории
-    const subcategory = await prisma.subcategory.findFirst({
-        where: { link: params.subcategory },
-    });
-
-    // Получение продуктов по категории и подкатегории
-    const products = await prisma.product.findMany({
-        where: {
-            categoryId: category?.id,
-            subcategoryId: subcategory?.id,
-        },
-        include: {
-            ingredients: true,
-            extraIngredient: true,
-            items: true,
-        },
-    });
 
     return (
         <>

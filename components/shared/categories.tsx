@@ -9,7 +9,6 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
-import Image from "next/image";
 import { CategoriesWithRelations } from "@/@types/prisma";
 
 interface Props {
@@ -34,9 +33,8 @@ export const Categories: React.FC<Props> = ({ categories, className }) => {
                                         key={subcategory.name}
                                     >
                                         <div className="flex flex-col items-center">
-                                            <Image
-                                                width={70}
-                                                height={70}
+                                            <img
+                                                className="h-[70px]"
                                                 src={subcategory.imageUrl}
                                                 alt="icon"
                                             />
