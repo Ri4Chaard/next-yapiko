@@ -60,7 +60,11 @@ export const SearchBar: React.FC<Props> = ({ className }) => {
             >
                 <div
                     className="absolute flex items-center h-12 cursor-pointer"
-                    onClick={() => setActive(!active)}
+                    onClick={() => {
+                        setActive(!active);
+                        setFocused(!focused);
+                        setActive(!active);
+                    }}
                 >
                     <Search width={24} className="ml-2 text-primary" />
                 </div>
@@ -84,7 +88,11 @@ export const SearchBar: React.FC<Props> = ({ className }) => {
                             <Link
                                 onClick={onClickItem}
                                 key={product.id}
-                                href={`/${product.categoryLink}/${product.subcategoryLink}`}
+                                href={`/${product.categoryLink}/${
+                                    product.subcategoryLink
+                                        ? product.subcategoryLink
+                                        : ""
+                                }`}
                                 className="flex justify-between items-center gap-3 w-full px-3 my-2 hover:bg-primary/10"
                             >
                                 <img

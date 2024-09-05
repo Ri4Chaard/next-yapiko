@@ -1,7 +1,7 @@
 import { ProductsMenu } from "@/components/shared/products-menu";
 import { TopBar } from "@/components/shared/top-bar";
-import { findMenu, GetParams, GetSearchParams } from "@/lib/findMenu";
-import { prisma } from "@/prisma/prisma-client";
+import { findProducts, GetParams, GetSearchParams } from "@/lib/find-products";
+import { getCategories } from "@/lib/get-categories";
 import { notFound } from "next/navigation";
 
 export default async function SubcategoryPage({
@@ -11,22 +11,13 @@ export default async function SubcategoryPage({
     params: GetParams;
     searchParams: GetSearchParams;
 }) {
-    const categories = await prisma.category.findMany({
-        include: { subcategories: true },
-    });
-
-    const category = await prisma.category.findFirst({
-        where: { link: params.category },
-    });
-    const subcategory = await prisma.subcategory.findFirst({
-        where: { link: params.subcategory },
-    });
+    const { categories, category, subcategory } = await getCategories(params);
 
     if (!category) {
         return notFound();
     }
 
-    const { products } = await findMenu(params, searchParams);
+    const { products } = await findProducts(params, searchParams);
 
     return (
         <>

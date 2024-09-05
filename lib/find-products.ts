@@ -10,7 +10,7 @@ export interface GetSearchParams {
     ingredients?: string;
 }
 
-export const findMenu = async (
+export const findProducts = async (
     params: GetParams,
     searchParams: GetSearchParams
 ) => {
