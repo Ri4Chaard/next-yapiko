@@ -1,6 +1,4 @@
 import { prisma } from "@/prisma/prisma-client";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
-import { useSearchParams } from "next/navigation";
 
 export interface GetParams {
     category: string;
@@ -18,21 +16,10 @@ export const findMenu = async (
 ) => {
     const ingredientsIdArr = searchParams.ingredients?.split(",").map(Number);
 
-    const category = await prisma.category.findFirst({
-        where: { link: params.category },
-    });
-
-    let subcategory;
-
-    if (params.subcategory)
-        subcategory = await prisma.subcategory.findFirst({
-            where: { link: params.subcategory },
-        });
-
     const products = await prisma.product.findMany({
         where: {
-            categoryId: category?.id,
-            subcategoryId: subcategory?.id,
+            categoryLink: params.category,
+            subcategoryLink: params.subcategory,
             ingredients: ingredientsIdArr
                 ? { some: { id: { in: ingredientsIdArr } } }
                 : undefined,
@@ -42,5 +29,5 @@ export const findMenu = async (
         },
     });
 
-    return { products, category, subcategory };
+    return { products };
 };

@@ -106,16 +106,16 @@ async function up() {
         data: {
             name: "Огірок",
             imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            categories: { connect: [{ id: 1 }] },
+            categories: { connect: [{ id: 1 }, { id: 3 }] },
             subcategories: { connect: [{ id: 2 }] },
-            products: { connect: [{ id: 3 }] },
+            products: { connect: [{ id: 3 }, { id: 10 }] },
         },
     });
     await prisma.ingredient.create({
         data: {
             name: "Окунь копчений",
             imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            categories: { connect: [{ id: 1 }] },
+            categories: { connect: [{ id: 1 }, { id: 3 }] },
             subcategories: { connect: [{ id: 2 }] },
             products: { connect: [{ id: 3 }] },
         },
@@ -124,9 +124,9 @@ async function up() {
         data: {
             name: "Сир чеддер",
             imageUrl: "/assets/images/ingredients/_1__2_7.webp",
-            categories: { connect: [{ id: 1 }, { id: 2 }] },
+            categories: { connect: [{ id: 1 }, { id: 2 }, { id: 3 }] },
             subcategories: { connect: [{ id: 2 }, { id: 5 }] },
-            products: { connect: [{ id: 3 }, { id: 5 }] },
+            products: { connect: [{ id: 3 }, { id: 5 }, { id: 10 }] },
         },
     });
     await prisma.ingredient.create({

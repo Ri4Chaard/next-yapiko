@@ -32,7 +32,7 @@ model Category{
     id              Int         @id @default(autoincrement())
 
     name            String
-    link            String
+    link            String      @unique
 
     subcategories   Subcategory[]
     products        Product[]
@@ -46,7 +46,7 @@ model Subcategory{
     id              Int         @id @default(autoincrement())
 
     name            String
-    link            String
+    link            String      @unique
     imageUrl        String
 
     products        Product[]
@@ -72,11 +72,11 @@ model Product{
     extraIngredient     ExtraIngredient[]
     items               ProductItem[]
 
-    category        Category        @relation(fields: [categoryId], references: [id])
-    categoryId      Int
+    category        Category        @relation(fields: [categoryLink], references: [link])
+    categoryLink    String
 
-    subcategory     Subcategory?    @relation(fields: [subcategoryId], references: [id])
-    subcategoryId   Int?
+    subcategory     Subcategory?    @relation(fields: [subcategoryLink], references: [link])
+    subcategoryLink String?
 
     createdAt       DateTime    @default(now())
     updatedAt       DateTime    @updatedAt

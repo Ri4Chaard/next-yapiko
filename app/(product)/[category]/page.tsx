@@ -15,12 +15,15 @@ export default async function CategoryPage({
         include: { ingredients: true, subcategories: true },
     });
 
-    // Найти категорию по ссылке
-    const { products, category } = await findMenu(params, searchParams);
+    const category = await prisma.category.findFirst({
+        where: { link: params.category },
+    });
 
     if (!category) {
         return notFound();
     }
+
+    const { products } = await findMenu(params, searchParams);
 
     return (
         <>

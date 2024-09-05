@@ -15,14 +15,18 @@ export default async function SubcategoryPage({
         include: { subcategories: true },
     });
 
-    const { products, category, subcategory } = await findMenu(
-        params,
-        searchParams
-    );
+    const category = await prisma.category.findFirst({
+        where: { link: params.category },
+    });
+    const subcategory = await prisma.subcategory.findFirst({
+        where: { link: params.subcategory },
+    });
 
     if (!category) {
         return notFound();
     }
+
+    const { products } = await findMenu(params, searchParams);
 
     return (
         <>
