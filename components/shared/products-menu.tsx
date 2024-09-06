@@ -3,12 +3,12 @@ import { Container } from "./container";
 import { Title } from "./title";
 import { Filters } from "./filters";
 import { ProductList } from "./product-list";
-import { ProductsWithRealtions } from "@/@types/prisma";
+import { ProductWithRelations } from "@/@types/prisma";
 
 interface Props {
     category: string;
     subcategory?: string;
-    products: ProductsWithRealtions[];
+    products: ProductWithRelations[];
     className?: string;
 }
 

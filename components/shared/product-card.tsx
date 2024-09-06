@@ -1,49 +1,63 @@
-import React from "react";
-import { cn } from "@/lib/utils";
-import { Title } from "./title";
-import { Plus } from "lucide-react";
-import Link from "next/link";
+"use client";
+
+import { useCartStore } from "@/store/cart";
+import { ProductCardForm } from "./product-card-form";
+import { PizzaCardForm } from "./pizza-card-form";
+import { ProductWithRelations } from "@/@types/prisma";
 
 interface Props {
-    imageUrl: string;
-    name: string;
-    description: string;
-    price: number;
-    className?: string;
+    product: ProductWithRelations;
+    onSubmit?: VoidFunction;
 }
 
 export const ProductCard: React.FC<Props> = ({
-    imageUrl,
-    name,
-    description,
-    price,
-    className,
+    product,
+    onSubmit: _onSubmit,
 }) => {
+    const [addCartItem, loading] = useCartStore((state) => [
+        state.addCartItem,
+        state.loading,
+    ]);
+
+    const firstItem = product.items[0];
+    const isPizzaForm = Boolean(product.items[0].pizzaSize);
+
+    const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
+        try {
+            const itemId = productItemId ?? firstItem.id;
+
+            await addCartItem({
+                productItemId: itemId,
+                ingredients,
+            });
+
+            _onSubmit?.();
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    if (isPizzaForm)
+        return (
+            <PizzaCardForm
+                imageUrl={product.imageUrl}
+                name={product.name}
+                description={product.description}
+                extraIngredients={product.extraIngredients || []}
+                items={product.items}
+                onSubmit={onSubmit}
+                loading={loading}
+            />
+        );
+
     return (
-        <div className={cn("relative w-[450px]", className)}>
-            <Link href={`/${name}`}>
-                <img src={imageUrl} alt={name} className="rounded-md" />
-            </Link>
-            <div className="absolute w-full flex items-center justify-between bottom-4 px-4 font-semibold text-white">
-                <Link href={`/${name}`}>
-                    <Title
-                        text={name}
-                        size="sm"
-                        className="hover:text-salad transition-colors"
-                    />
-                </Link>
-                <div className="flex flex-col">
-                    <span className="self-end text-white/70">
-                        {description}
-                    </span>
-                    <div className="flex items-center justify-between">
-                        <span className="text-[22px] mr-2">{price}₴</span>
-                        <button className="w-[30px] h-[30px] flex items-center justify-center rounded-full bg-salad text-black transition-colors hover:bg-primary hover:text-primary-foreground">
-                            <Plus />
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <ProductCardForm
+            imageUrl={product.imageUrl}
+            name={product.name}
+            description={product.description}
+            onSubmit={onSubmit}
+            price={firstItem.price}
+            loading={loading}
+        />
     );
 };
