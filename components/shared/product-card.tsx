@@ -54,6 +54,7 @@ export const ProductCard: React.FC<Props> = ({
     if (isPizzaForm)
         return (
             <PizzaCardForm
+                id={product.id}
                 imageUrl={product.imageUrl}
                 name={product.name}
                 description={firstItem.description}
@@ -66,6 +67,7 @@ export const ProductCard: React.FC<Props> = ({
 
     return (
         <ProductCardForm
+            id={product.id}
             imageUrl={product.imageUrl}
             name={product.name}
             description={firstItem.description}

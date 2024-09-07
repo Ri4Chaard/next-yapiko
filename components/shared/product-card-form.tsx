@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 
 interface Props {
+    id: number;
     imageUrl: string;
     name: string;
     description: string;
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export const ProductCardForm: React.FC<Props> = ({
+    id,
     imageUrl,
     name,
     description,
@@ -26,11 +28,11 @@ export const ProductCardForm: React.FC<Props> = ({
 }) => {
     return (
         <div className={cn("relative w-[450px]", className)}>
-            <Link href={`/${name}`}>
+            <Link href={`/product/${id}`}>
                 <img src={imageUrl} alt={name} className="rounded-md" />
             </Link>
             <div className="absolute w-full flex items-center justify-between bottom-4 px-4 font-semibold">
-                <Link href={`/${name}`}>
+                <Link href={`/product/${id}`}>
                     <Title
                         text={name}
                         size="sm"

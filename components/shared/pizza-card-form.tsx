@@ -4,7 +4,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Title } from "./title";
-import { Plus } from "lucide-react";
+import { LoaderCircle, Plus } from "lucide-react";
 
 import { GroupVariants } from "./group-variants";
 import {
@@ -21,6 +21,7 @@ import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
 
 interface Props {
+    id: number;
     imageUrl: string;
     name: string;
     description: string;
@@ -32,6 +33,7 @@ interface Props {
 }
 
 export const PizzaCardForm: React.FC<Props> = ({
+    id,
     imageUrl,
     name,
     items,
@@ -64,12 +66,12 @@ export const PizzaCardForm: React.FC<Props> = ({
 
     return (
         <div className={cn("relative w-[450px]", className)}>
-            <Link href={`/${name}`}>
+            <Link href={`/product/${id}`}>
                 <img src={imageUrl} alt={name} className="rounded-md" />
             </Link>
             <div className="absolute w-full flex items-center justify-between bottom-4 px-4 font-semibold">
                 <div className="flex flex-col w-full">
-                    <Link href={`/${name}`}>
+                    <Link href={`/product/${id}`}>
                         <Title
                             text={name}
                             size="sm"
@@ -78,8 +80,12 @@ export const PizzaCardForm: React.FC<Props> = ({
                     </Link>
                     {loading ? (
                         <div className="flex justify-between">
-                            <Skeleton className="rounded-[8px] w-[121px] h-10 text-black" />
-                            <Skeleton className="w-[169px] h-10 mr-6 rounded-[8px]" />
+                            <div className="flex items-center justify-center rounded-[8px] w-[121px] h-10 bg-muted">
+                                <LoaderCircle className="w-5 h-5 animate-spin" />
+                            </div>
+                            <div className="flex items-center justify-center w-[169px] h-10 mr-6 rounded-[8px] bg-muted">
+                                <LoaderCircle className="w-5 h-5 animate-spin" />
+                            </div>
                         </div>
                     ) : (
                         <div className="flex justify-between text-sm">

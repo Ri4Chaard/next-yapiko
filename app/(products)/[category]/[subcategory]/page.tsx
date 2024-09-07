@@ -4,14 +4,22 @@ import { findProducts, GetParams, GetSearchParams } from "@/lib/find-products";
 import { getCategories } from "@/lib/get-categories";
 import { notFound } from "next/navigation";
 
-export default async function CategoryPage({
+export async function generateMetadata({ params }: { params: GetParams }) {
+    const { subcategory } = await getCategories(params);
+
+    return {
+        title: `Next Yapiko | ${subcategory?.name}`,
+    };
+}
+
+export default async function SubcategoryPage({
     params,
     searchParams,
 }: {
     params: GetParams;
     searchParams: GetSearchParams;
 }) {
-    const { categories, category } = await getCategories(params);
+    const { categories, category, subcategory } = await getCategories(params);
 
     if (!category) {
         return notFound();
@@ -24,6 +32,7 @@ export default async function CategoryPage({
             <TopBar categories={categories} />
             <ProductsMenu
                 category={category ? category.name : ""}
+                subcategory={subcategory ? subcategory.name : ""}
                 products={products}
             />
         </>
