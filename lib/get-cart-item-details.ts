@@ -12,8 +12,6 @@ export const getCartItemDetails = (
         details.push(`${typeName}, ${pizzaSize} см`);
     }
 
-    console.log(pizzaBorder);
-
     if (ingredients)
         details.push(...ingredients.map((ingredient) => ingredient.name));
 

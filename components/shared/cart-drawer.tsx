@@ -28,6 +28,8 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
 
     const [redirecting, setRedirecting] = React.useState(false);
 
+    console.log(items);
+
     const onClickCountButton = (
         id: number,
         quantity: number,

@@ -96,7 +96,9 @@ export const PizzaCardForm: React.FC<Props> = ({
                 </div>
                 <div className="flex flex-col self-end">
                     <span className="self-end text-white/70">
-                        {description}
+                        {items.map((item) =>
+                            item.id === currentItemId ? item.description : ""
+                        )}
                     </span>
                     <div className="flex items-center justify-between">
                         <span className="text-[22px] mr-2 text-white">

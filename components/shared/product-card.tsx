@@ -42,7 +42,7 @@ export const ProductCard: React.FC<Props> = ({
             <PizzaCardForm
                 imageUrl={product.imageUrl}
                 name={product.name}
-                description={product.description}
+                description={firstItem.description}
                 extraIngredients={product.extraIngredients || []}
                 items={product.items}
                 onSubmit={onSubmit}
@@ -54,7 +54,7 @@ export const ProductCard: React.FC<Props> = ({
         <ProductCardForm
             imageUrl={product.imageUrl}
             name={product.name}
-            description={product.description}
+            description={firstItem.description}
             onSubmit={onSubmit}
             price={firstItem.price}
             loading={loading}

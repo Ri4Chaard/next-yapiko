@@ -8,7 +8,7 @@ import { useClickAway, useDebounce } from "react-use";
 import { Product } from "@prisma/client";
 import { Api } from "@/services/api-client";
 import Link from "next/link";
-import { ProductsWithRealtions } from "@/@types/prisma";
+import { ProductWithRelations } from "@/@types/prisma";
 
 interface Props {
     className?: string;
@@ -19,7 +19,7 @@ export const SearchBar: React.FC<Props> = ({ className }) => {
 
     const [searchQuery, setSearchQuery] = React.useState("");
     const [focused, setFocused] = React.useState(false);
-    const [products, setProducts] = React.useState<ProductsWithRealtions[]>([]);
+    const [products, setProducts] = React.useState<ProductWithRelations[]>([]);
     const ref = React.useRef(null);
 
     useClickAway(ref, () => {
@@ -105,7 +105,7 @@ export const SearchBar: React.FC<Props> = ({ className }) => {
                                     <span className="font-bold">
                                         {product.items[0].price}₴/
                                     </span>
-                                    {product.description.split(" ")[0]}
+                                    {product.items[0].description.split(" ")[0]}
                                 </p>
                             </Link>
                         ))}

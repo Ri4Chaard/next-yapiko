@@ -64,7 +64,6 @@ model Product{
 
     name            String
     imageUrl        String
-    description     String
 
     //Склад страви
     ingredients         Ingredient[]
@@ -87,6 +86,7 @@ model ProductItem{
     id              Int         @id @default(autoincrement())
 
     price           Int
+    description     String
 
     pizzaSize       Int?
     pizzaBorder     Int?
