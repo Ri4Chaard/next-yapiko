@@ -9,7 +9,7 @@ export const CartItemDetailsImage: React.FC<Props> = ({ src, className }) => {
     return (
         <img
             className={cn(
-                "w-[170px] h-[130px] rounded-md object-cover",
+                "w-[150px] h-[110px] rounded-md object-cover",
                 className
             )}
             src={src}

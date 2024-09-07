@@ -16,7 +16,13 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Title } from "./title";
 import { Button } from "../ui/button";
-import { ArrowBigLeft, ArrowRight, ShoppingBasket } from "lucide-react";
+import {
+    ArrowBigLeft,
+    ArrowBigRight,
+    ArrowRight,
+    Banknote,
+    ShoppingBasket,
+} from "lucide-react";
 import { CartDrawerItem } from "./cart-drawer-item";
 import { getCartItemDetails } from "@/lib/get-cart-item-details";
 import { PizzaBorder, PizzaSize } from "@/constants/pizza";
@@ -27,8 +33,6 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
         useCart();
 
     const [redirecting, setRedirecting] = React.useState(false);
-
-    console.log(items);
 
     const onClickCountButton = (
         id: number,
@@ -51,7 +55,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                     )}
                 >
                     {totalAmount > 0 && (
-                        <SheetHeader className="bg-primary py-7 px-3">
+                        <SheetHeader className="bg-primary py-4 px-3">
                             <SheetTitle className="flex items-center text-primary-foreground">
                                 <ShoppingBasket width={30} strokeWidth={2} />
                                 <span className="h-full w-[1px] bg-secondary/30 mx-3" />
@@ -98,7 +102,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                         <>
                             <div className="overflow-auto flex-1">
                                 {items.map((item) => (
-                                    <div key={item.id} className="mb-2">
+                                    <div key={item.id} className="my-2">
                                         <CartDrawerItem
                                             id={item.id}
                                             imageUrl={item.imageUrl}
@@ -127,12 +131,16 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                                 ))}
                             </div>
 
-                            <SheetFooter className=" bg-white p-8">
-                                <div className="w-full">
-                                    <div className="flex mb-4">
-                                        <span className="flex flex-1 text-lg text-neutral-500">
-                                            Разом
-                                            <div className="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2"></div>
+                            <SheetFooter>
+                                <div className="w-full ">
+                                    <div className="flex items-center bg-primary p-4 text-white">
+                                        <Banknote
+                                            width={35}
+                                            height={35}
+                                            className="-rotate-45 mr-2"
+                                        />
+                                        <span className="flex flex-1 text-sm ">
+                                            Проміжний підсумок кошика
                                         </span>
                                         <span className="font-bold text-lg">
                                             {totalAmount} ₴
@@ -140,13 +148,14 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                                     </div>
                                     <Link href="/checkout">
                                         <Button
+                                            variant="salad"
                                             onClick={() => setRedirecting(true)}
                                             loading={redirecting}
                                             type="submit"
-                                            className="w-full h-12 text-base"
+                                            className="w-full h-20 text-lg font-bold rounded-none"
                                         >
-                                            Оформити замовлення
-                                            <ArrowRight className="w-5 ml-2" />
+                                            Перейти до оформлення
+                                            <ArrowBigRight className="ml-4" />
                                         </Button>
                                     </Link>
                                 </div>

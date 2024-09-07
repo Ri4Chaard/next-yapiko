@@ -18,6 +18,7 @@ import { ExtraIngredient, ProductItem } from "@prisma/client";
 import { usePizzaOptions } from "@/hooks/use-pizza-options";
 import { getPizzaDetails } from "@/lib/get-pizza-details";
 import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
 
 interface Props {
     imageUrl: string;
@@ -33,7 +34,6 @@ interface Props {
 export const PizzaCardForm: React.FC<Props> = ({
     imageUrl,
     name,
-    description,
     items,
     extraIngredients,
     onSubmit,
@@ -43,6 +43,7 @@ export const PizzaCardForm: React.FC<Props> = ({
     const {
         size,
         border,
+        description,
         selectedIngredients,
         currentItemId,
         setSize,
@@ -75,30 +76,34 @@ export const PizzaCardForm: React.FC<Props> = ({
                             className="hover:text-salad transition-colors mb-2 text-white"
                         />
                     </Link>
+                    {loading ? (
+                        <div className="flex justify-between">
+                            <Skeleton className="rounded-[8px] w-[121px] h-10 text-black" />
+                            <Skeleton className="w-[169px] h-10 mr-6 rounded-[8px]" />
+                        </div>
+                    ) : (
+                        <div className="flex justify-between text-sm">
+                            <GroupVariants
+                                items={pizzaSizes}
+                                value={String(size)}
+                                onClick={(value) =>
+                                    setSize(Number(value) as PizzaSize)
+                                }
+                            />
 
-                    <div className="flex justify-between text-sm">
-                        <GroupVariants
-                            items={pizzaSizes}
-                            value={String(size)}
-                            onClick={(value) =>
-                                setSize(Number(value) as PizzaSize)
-                            }
-                        />
-
-                        <GroupSelectVariants
-                            items={pizzaBorders}
-                            value={String(border)}
-                            onChange={(value) =>
-                                setBorder(Number(value) as PizzaBorder)
-                            }
-                        />
-                    </div>
+                            <GroupSelectVariants
+                                items={pizzaBorders}
+                                value={String(border)}
+                                onChange={(value) =>
+                                    setBorder(Number(value) as PizzaBorder)
+                                }
+                            />
+                        </div>
+                    )}
                 </div>
                 <div className="flex flex-col self-end">
                     <span className="self-end text-white/70">
-                        {items.map((item) =>
-                            item.id === currentItemId ? item.description : ""
-                        )}
+                        {description}
                     </span>
                     <div className="flex items-center justify-between">
                         <span className="text-[22px] mr-2 text-white">

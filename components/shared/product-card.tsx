@@ -4,6 +4,8 @@ import { useCartStore } from "@/store/cart";
 import { ProductCardForm } from "./product-card-form";
 import { PizzaCardForm } from "./pizza-card-form";
 import { ProductWithRelations } from "@/@types/prisma";
+import toast from "react-hot-toast";
+import { ShoppingBasket } from "lucide-react";
 
 interface Props {
     product: ProductWithRelations;
@@ -30,9 +32,21 @@ export const ProductCard: React.FC<Props> = ({
                 productItemId: itemId,
                 ingredients,
             });
+            toast(
+                <div className="text-primary flex items-center">
+                    <ShoppingBasket className="animate-bounce" />
+                    <p>
+                        <b> + 1 </b>
+                        <span className="text-black">
+                            <b>{product.name}</b> додано!
+                        </span>
+                    </p>
+                </div>
+            );
 
             _onSubmit?.();
         } catch (err) {
+            toast.error("Не вдалося додати продукт до кошика");
             console.log(err);
         }
     };

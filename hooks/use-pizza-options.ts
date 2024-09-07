@@ -7,6 +7,7 @@ import { ProductItem } from "@prisma/client";
 interface ReturnProps {
     size: PizzaSize;
     border: PizzaBorder;
+    description?: string;
     selectedIngredients: Set<number>;
     currentItemId?: number;
     setSize: (size: PizzaSize) => void;
@@ -25,9 +26,14 @@ export const usePizzaOptions = (items: ProductItem[]): ReturnProps => {
         (item) => item.pizzaBorder === border && item.pizzaSize === size
     )?.id;
 
+    const description = items.find(
+        (item) => item.pizzaBorder === border && item.pizzaSize === size
+    )?.description;
+
     return {
         size,
         border,
+        description,
         selectedIngredients,
         currentItemId,
         setSize,
