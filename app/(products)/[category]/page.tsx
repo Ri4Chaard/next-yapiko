@@ -19,7 +19,7 @@ export default async function CategoryPage({
     params: GetParams;
     searchParams: GetSearchParams;
 }) {
-    const { categories, category } = await getCategories(params);
+    const { category } = await getCategories(params);
 
     if (!category) {
         return notFound();
@@ -28,12 +28,9 @@ export default async function CategoryPage({
     const { products } = await findProducts(params, searchParams);
 
     return (
-        <>
-            <TopBar categories={categories} />
-            <ProductsMenu
-                category={category ? category.name : ""}
-                products={products}
-            />
-        </>
+        <ProductsMenu
+            category={category ? category.name : ""}
+            products={products}
+        />
     );
 }

@@ -155,6 +155,42 @@ export const products = [
         imageUrl: "/assets/images/products/roll1.webp",
         categoryLink: "burgers",
     },
+    {
+        name: "Corona Extra",
+        imageUrl: "/assets/images/products/corona.webp",
+        categoryLink: "drinks",
+        subcategoryLink: "beer",
+    },
+    {
+        name: "Kozel темне",
+        imageUrl: "/assets/images/products/corona.webp",
+        categoryLink: "drinks",
+        subcategoryLink: "beer",
+    },
+    {
+        name: "Морс вишневий",
+        imageUrl: "/assets/images/products/mors.webp",
+        categoryLink: "drinks",
+        subcategoryLink: "non-alcohol",
+    },
+    {
+        name: "Полунично-м'ятний морс",
+        imageUrl: "/assets/images/products/mors.webp",
+        categoryLink: "drinks",
+        subcategoryLink: "non-alcohol",
+    },
+    {
+        name: "Соус кисло-солодкий",
+        imageUrl: "/assets/images/products/kislo-solodkiy.webp",
+        categoryLink: "other",
+        subcategoryLink: "sauce",
+    },
+    {
+        name: "Соус малина вишня",
+        imageUrl: "/assets/images/products/kislo-solodkiy.webp",
+        categoryLink: "other",
+        subcategoryLink: "sauce",
+    },
 ];
 
 export const productItems = [
@@ -253,4 +289,10 @@ export const productItems = [
     { price: 100, description: "300г", productId: 8 },
     { price: 100, description: "290г", productId: 9 },
     { price: 300, description: "450г", productId: 10 },
+    { price: 79, description: "0.355л", productId: 11 },
+    { price: 49, description: "0.5л", productId: 12 },
+    { price: 79, description: "1л", productId: 13 },
+    { price: 79, description: "1л", productId: 14 },
+    { price: 29, description: "50г", productId: 15 },
+    { price: 25, description: "50г", productId: 16 },
 ];

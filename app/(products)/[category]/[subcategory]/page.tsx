@@ -19,7 +19,7 @@ export default async function SubcategoryPage({
     params: GetParams;
     searchParams: GetSearchParams;
 }) {
-    const { categories, category, subcategory } = await getCategories(params);
+    const { category, subcategory } = await getCategories(params);
 
     if (!category) {
         return notFound();
@@ -28,13 +28,10 @@ export default async function SubcategoryPage({
     const { products } = await findProducts(params, searchParams);
 
     return (
-        <>
-            <TopBar categories={categories} />
-            <ProductsMenu
-                category={category ? category.name : ""}
-                subcategory={subcategory ? subcategory.name : ""}
-                products={products}
-            />
-        </>
+        <ProductsMenu
+            category={category ? category.name : ""}
+            subcategory={subcategory ? subcategory.name : ""}
+            products={products}
+        />
     );
 }

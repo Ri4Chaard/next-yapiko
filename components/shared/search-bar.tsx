@@ -89,11 +89,7 @@ export const SearchBar: React.FC<Props> = ({ className }) => {
                             <Link
                                 onClick={onClickItem}
                                 key={product.id}
-                                href={`/${product.categoryLink}/${
-                                    product.subcategoryLink
-                                        ? product.subcategoryLink
-                                        : ""
-                                }`}
+                                href={`/product/${product.id}`}
                                 className="flex justify-between items-center gap-3 w-full px-3 my-2 hover:bg-primary/10"
                             >
                                 <img
