@@ -1,17 +1,27 @@
 import { Product } from "@prisma/client";
 import { axiosInstance } from "./instance";
 import { ApiRoutes } from "./constants";
-import { ProductsWithRealtions } from "@/@types/prisma";
+import { ProductWithRelations } from "@/@types/prisma";
 
 export const search = async (
     query: string
-): Promise<ProductsWithRealtions[]> => {
+): Promise<ProductWithRelations[]> => {
     return (
-        await axiosInstance.get<ProductsWithRealtions[]>(
+        await axiosInstance.get<ProductWithRelations[]>(
             ApiRoutes.SEARCH_PRODUCTS,
             {
                 params: { query },
             }
         )
+    ).data;
+};
+
+export const getRecomendations = async (params: {
+    category: string;
+}): Promise<ProductWithRelations[]> => {
+    return (
+        await axiosInstance.get<ProductWithRelations[]>(ApiRoutes.PRODUCTS, {
+            params,
+        })
     ).data;
 };

@@ -1,3 +1,4 @@
+import { CarouselPlugin } from "@/components/shared/carousel-plugin";
 import { Container } from "@/components/shared/container";
 import { IngredientsDetails } from "@/components/shared/ingredients-details";
 import { Recomendations } from "@/components/shared/recomendations";
@@ -73,6 +74,14 @@ export default async function ProductPage({
                     </div>
                     <Recomendations className="mt-5" />
                 </div>
+            </div>
+
+            <div className="my-10">
+                <h2 className="text-2xl font-bold">Рекомендації</h2>
+                <CarouselPlugin
+                    className="mt-4"
+                    category={product.categoryLink}
+                />
             </div>
         </Container>
     );
