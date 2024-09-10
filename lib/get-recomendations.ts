@@ -9,15 +9,15 @@ export const getRecomendations = async () => {
         where: { subcategoryLink: "non-alcohol" },
         include: { items: true },
     });
-    const sauce = await prisma.product.findMany({
-        where: { subcategoryLink: "sauce" },
-        include: { items: true },
-    });
+    // const sauce = await prisma.product.findMany({
+    //     where: { subcategoryLink: "sauce" },
+    //     include: { items: true },
+    // });
 
     const recomendations = [
         beer[Math.floor(Math.random() * beer.length)],
         nonAlcohol[Math.floor(Math.random() * nonAlcohol.length)],
-        sauce[Math.floor(Math.random() * sauce.length)],
+        // sauce[Math.floor(Math.random() * sauce.length)],
     ];
 
     return recomendations;

@@ -1,4 +1,5 @@
 import { Carousel } from "@/components/shared/carousel/carousel";
+import { Container } from "@/components/shared/container";
 import { PopularCategories } from "@/components/shared/popular-categories";
 import { TopBar } from "@/components/shared/top-bar";
 import { prisma } from "@/prisma/prisma-client";
@@ -14,7 +15,22 @@ export default async function Home() {
     return (
         <>
             <div className="mt-10">
-                <Carousel slides={slides} />
+                <Container>
+                    <Carousel>
+                        {slides.map((slide, index) => (
+                            <div
+                                className="flex items-center justify-center rounded-md flex-shrink-0 flex-grow-0 basis-[80%]"
+                                key={index}
+                            >
+                                <img
+                                    className="rounded-md border-[14px] border-secondary w-[90%]"
+                                    src={slide}
+                                    key={index}
+                                />
+                            </div>
+                        ))}
+                    </Carousel>
+                </Container>
             </div>
 
             <div className="my-10">

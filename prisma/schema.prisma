@@ -68,7 +68,7 @@ model Product{
     //Склад страви
     ingredients         Ingredient[]
     //Інгредієнти, які можна додати до страви
-    extraIngredient     ExtraIngredient[]
+    extraIngredients     ExtraIngredient[]
     items               ProductItem[]
 
     category        Category        @relation(fields: [categoryLink], references: [link])

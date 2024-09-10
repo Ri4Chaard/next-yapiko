@@ -103,6 +103,7 @@ export const PizzaCardForm: React.FC<Props> = ({
                                 onChange={(value) =>
                                     setBorder(Number(value) as PizzaBorder)
                                 }
+                                className="mr-6"
                             />
                         </div>
                     )}

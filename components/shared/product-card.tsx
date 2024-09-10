@@ -6,6 +6,7 @@ import { PizzaCardForm } from "./pizza-card-form";
 import { ProductWithRelations } from "@/@types/prisma";
 import toast from "react-hot-toast";
 import { ShoppingBasket } from "lucide-react";
+import { ToastCartSuccess } from "./toast-messages/toast-cart-success";
 
 interface Props {
     product: ProductWithRelations;
@@ -32,17 +33,7 @@ export const ProductCard: React.FC<Props> = ({
                 productItemId: itemId,
                 ingredients,
             });
-            toast(
-                <div className="text-primary flex items-center">
-                    <ShoppingBasket className="animate-bounce" />
-                    <p>
-                        <b> + 1 </b>
-                        <span className="text-black">
-                            <b>{product.name}</b> додано!
-                        </span>
-                    </p>
-                </div>
-            );
+            toast(<ToastCartSuccess product={product} />);
 
             _onSubmit?.();
         } catch (err) {

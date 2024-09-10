@@ -2,8 +2,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { getRecomendations } from "@/lib/get-recomendations";
 import Link from "next/link";
-import { Button } from "../ui/button";
-import { Plus } from "lucide-react";
+import { RecomendationsAddButton } from "./recomendations-add-button";
 
 interface Props {
     className?: string;
@@ -43,14 +42,7 @@ export const Recomendations: React.FC<Props> = async ({ className }) => {
                                 }
                             </p>
                         </Link>
-                        <Button
-                            // onClick={() => onSubmit?.()}
-                            variant="salad"
-                            className="w-[30px] p-0 h-[30px] rounded-full transition-colors hover:bg-primary hover:text-primary-foreground"
-                            // loading={loading}
-                        >
-                            <Plus />
-                        </Button>
+                        <RecomendationsAddButton product={recomendation} />
                     </div>
                 ))}
             </div>

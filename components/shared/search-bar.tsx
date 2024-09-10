@@ -37,10 +37,11 @@ export const SearchBar: React.FC<Props> = ({ className }) => {
             }
         },
         250,
-        [searchQuery]
+        [searchQuery, active]
     );
 
     const onClickItem = () => {
+        setActive(false);
         setFocused(false);
         setSearchQuery("");
         setProducts([]);

@@ -25,10 +25,7 @@ export const GroupSelectVariants: React.FC<Props> = ({
     return (
         <Select onValueChange={onChange} defaultValue={String(value)}>
             <SelectTrigger
-                className={cn(
-                    "w-[169px] mr-6 rounded-[8px] text-black",
-                    className
-                )}
+                className={cn("w-[169px] rounded-[8px] text-black", className)}
             >
                 <SelectValue />
             </SelectTrigger>
