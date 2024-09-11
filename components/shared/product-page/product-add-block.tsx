@@ -7,12 +7,14 @@ import toast from "react-hot-toast";
 import { ToastCartSuccess } from "../toast-messages/toast-cart-success";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface Props {
     product: ProductWithRelations;
+    className?: string;
 }
 
-export const ProductAddBlock: React.FC<Props> = ({ product }) => {
+export const ProductAddBlock: React.FC<Props> = ({ product, className }) => {
     const [addCartItem, loading] = useCartStore((state) => [
         state.addCartItem,
         state.loading,
@@ -34,7 +36,12 @@ export const ProductAddBlock: React.FC<Props> = ({ product }) => {
     };
 
     return (
-        <div className="flex items-center justify-between px-3 py-5 bg-primary text-primary-foreground">
+        <div
+            className={cn(
+                "flex items-center justify-between px-3 py-5 bg-primary text-primary-foreground",
+                className
+            )}
+        >
             <div>
                 <span className="text-2xl font-bold">
                     {product.items[0].price}₴ /
