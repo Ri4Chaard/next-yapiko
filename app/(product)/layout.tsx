@@ -16,7 +16,7 @@ export default async function ProductLayout({
         include: { subcategories: true },
     });
     return (
-        <main>
+        <main className="min-h-screen">
             <Suspense>
                 <Header categories={categories} />
             </Suspense>

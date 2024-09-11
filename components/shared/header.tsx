@@ -10,11 +10,18 @@ import { CategoriesWithRelations } from "@/@types/prisma";
 import { TopBar } from "./top-bar";
 
 interface Props {
-    categories: CategoriesWithRelations[];
+    categories?: CategoriesWithRelations[];
+    hasTopbar?: boolean;
+    hasCart?: boolean;
     className?: string;
 }
 
-export const Header: React.FC<Props> = ({ categories, className }) => {
+export const Header: React.FC<Props> = ({
+    categories,
+    hasTopbar = true,
+    hasCart = true,
+    className,
+}) => {
     return (
         <header className={cn("sticky top-0 z-10 bg-white", className)}>
             <div className="border-b border-secondary">
@@ -64,11 +71,11 @@ export const Header: React.FC<Props> = ({ categories, className }) => {
                             <b>Увійти</b>
                         </Button>
 
-                        <CartButton />
+                        {hasCart && <CartButton />}
                     </div>
                 </Container>
             </div>
-            <TopBar categories={categories} />
+            {hasTopbar && categories && <TopBar categories={categories} />}
         </header>
     );
 };

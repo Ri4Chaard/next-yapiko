@@ -17,7 +17,7 @@ export default async function RootLayout({
         include: { subcategories: true },
     });
     return (
-        <main>
+        <main className="min-h-screen">
             <Suspense>
                 <Header categories={categories} />
             </Suspense>
