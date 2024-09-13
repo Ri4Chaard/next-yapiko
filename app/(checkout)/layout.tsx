@@ -3,7 +3,7 @@ import { Header } from "@/components/shared/header";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-    title: "Next Yapiko | Замовлення",
+    title: "Next Yapiko | Кошик",
 };
 
 export default function CheckoutLayout({

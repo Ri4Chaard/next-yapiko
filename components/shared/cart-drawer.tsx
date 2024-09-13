@@ -152,7 +152,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                                             onClick={() => setRedirecting(true)}
                                             loading={redirecting}
                                             type="submit"
-                                            className="w-full h-20 text-lg font-bold rounded-none"
+                                            className="w-full h-20 text-lg font-bold rounded-none active:scale-100"
                                         >
                                             Перейти до оформлення
                                             <ArrowBigRight className="ml-4" />
