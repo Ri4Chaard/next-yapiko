@@ -36,6 +36,7 @@ export default function CheckoutPage() {
             address: "",
             house: "",
             entrance: "",
+            floor: "",
             apartment: "",
             comment: "",
         },

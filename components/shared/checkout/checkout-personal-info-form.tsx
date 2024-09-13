@@ -24,34 +24,62 @@ export const CheckoutPersonalInfoForm: React.FC<Props> = ({ className }) => {
             </div>
             <div className="grid grid-cols-2 gap-5 p-5">
                 <FormInput
+                    required
+                    label="Ім'я"
                     name="firstName"
                     className="text-base"
-                    placeholder="Ім'я"
                 />
                 <FormInput
+                    required
+                    label="Прізвище"
                     name="lastName"
                     className="text-base"
-                    placeholder="Прізвище"
                 />
                 <FormInput
+                    required
+                    label="E-Mail"
                     name="email"
                     className="text-base"
-                    placeholder="E-Mail"
                 />
                 <FormInput
+                    required
+                    label="Телефон"
                     name="phone"
                     className="text-base"
-                    placeholder="Телефон"
                 />
-                <FormInput
-                    name="address"
-                    className="text-base"
-                    placeholder="Телефон"
-                />
+                <div className="grid grid-cols-4 gap-4">
+                    <FormInput
+                        required
+                        label="Адреса"
+                        name="address"
+                        className="text-base  col-span-4"
+                    />
+                    <FormInput
+                        required
+                        label="Будинок"
+                        name="house"
+                        className="text-base"
+                    />
+                    <FormInput
+                        label="Під'їзд"
+                        name="entrance"
+                        className="text-base"
+                    />
+                    <FormInput
+                        label="Поверх"
+                        name="floor"
+                        className="text-base"
+                    />
+                    <FormInput
+                        label="Квартира"
+                        name="appartment"
+                        className="text-base"
+                    />
+                </div>
                 <FormTextarea
+                    label="Коментар"
                     name="comment"
                     className="text-base"
-                    placeholder="Ваш коментар..."
                 />
             </div>
         </div>

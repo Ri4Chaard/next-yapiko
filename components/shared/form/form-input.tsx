@@ -36,7 +36,7 @@ export const FormInput: React.FC<Props> = ({
 
     return (
         <div className={className}>
-            <p className="font-medium mb-2">
+            <p className="font-bold mb-2">
                 {label} {required && <RequiredSymbol />}
             </p>
 
