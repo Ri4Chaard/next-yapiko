@@ -4,12 +4,16 @@ import React from "react";
 
 interface QueryFilters {
     ingredients: string;
+    sort: string;
 }
+
 export interface Filters {
+    selectedSort: string;
     selectedIngredients: Set<string>;
 }
 
 interface ReturnProps extends Filters {
+    setSelectedSort: (value: string) => void;
     setSelectedIngredients: (key: string) => void;
 }
 
@@ -18,16 +22,24 @@ export const useFilters = (): ReturnProps => {
         keyof QueryFilters,
         string
     >;
+
     // Ingredient filter
     const [selectedIngredients, { toggle: toggleIngredients }] = useSet(
         new Set<string>(searchParams.get("ingredients")?.split(","))
     );
 
+    // Sort filter
+    const [selectedSort, setSelectedSort] = React.useState(
+        searchParams.get("sort") || ""
+    );
+
     return React.useMemo(
         () => ({
+            selectedSort,
+            setSelectedSort,
             selectedIngredients,
             setSelectedIngredients: toggleIngredients,
         }),
-        [selectedIngredients]
+        [selectedSort, selectedIngredients] // Add selectedSort as a dependency
     );
 };

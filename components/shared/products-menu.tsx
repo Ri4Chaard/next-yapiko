@@ -4,6 +4,14 @@ import { Title } from "./title";
 import { Filters } from "./filters";
 import { ProductList } from "./product-list";
 import { ProductWithRelations } from "@/@types/prisma";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "../ui/select";
 
 interface Props {
     category: string;

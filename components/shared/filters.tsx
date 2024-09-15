@@ -2,15 +2,12 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Title } from "./title";
 import { CheckboxFilterGroup } from "./checkbox-filter-group";
-import { Input } from "../ui/input";
-import { RangeSlider } from "./range-slider";
-import { FilterChecboxProps } from "./filter-checkbox";
 import { useIngredients } from "@/hooks/use-ingredients";
 import { useParams } from "next/navigation";
 import { useFilters } from "@/hooks/use-filters";
 import { useQueryFilters } from "@/hooks/use-query-filters";
+import { ProductsSort } from "./products-sort";
 
 interface Props {
     className?: string;
@@ -22,6 +19,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
     const filters = useFilters();
 
+    //TODO: add sort to query
     useQueryFilters(filters);
 
     const items = ingredients.map((item) => ({
@@ -31,7 +29,9 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
     return (
         <div className={cn("sticky top-[100px]", className)}>
-            <Title text="Фільтрація" size="sm" className="mb-5 font-bold" />
+            <ProductsSort
+                onChange={(value) => filters.setSelectedSort(value)}
+            />
 
             <CheckboxFilterGroup
                 title="Інгредієнти"
