@@ -12,8 +12,12 @@ import {
     checkoutFormSchema,
     CheckoutFormValues,
 } from "@/constants/checkout-form-schema";
+import { createOrder } from "@/app/actions";
+import toast from "react-hot-toast";
+import React from "react";
 
 export default function CheckoutPage() {
+    const [submitting, setSubmitting] = React.useState(false);
     const { totalAmount, updateItemQuantity, items, removeCartItem, loading } =
         useCart();
 
@@ -42,12 +46,34 @@ export default function CheckoutPage() {
         },
     });
 
+    const onSubmit = async (data: CheckoutFormValues) => {
+        try {
+            setSubmitting(true);
+            const paymentUrl = await createOrder(data);
+
+            toast.success(
+                "Замовлення успішно оформлене! 📝 Перехід на оплату...",
+                {
+                    icon: "✔️",
+                }
+            );
+
+            if (paymentUrl) {
+                window.location.href = paymentUrl;
+            }
+        } catch (err) {
+            console.log(err);
+            setSubmitting(false);
+            toast.error("Не вдалося створити замовлення", {
+                icon: "❌",
+            });
+        }
+    };
+
     return (
         <Container className="mt-10">
             <FormProvider {...form}>
-                <form
-                // onSubmit={form.handleSubmit(onSubmit)}
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)}>
                     <div className="flex gap-10">
                         {/* Ліва частина */}
                         <div className="flex flex-col gap-10 flex-1 mb-20">
@@ -61,7 +87,10 @@ export default function CheckoutPage() {
                         </div>
 
                         {/* Права частина */}
-                        <CheckoutSidebar totalAmount={totalAmount} />
+                        <CheckoutSidebar
+                            totalAmount={totalAmount}
+                            loading={loading || submitting}
+                        />
                     </div>
                 </form>
             </FormProvider>

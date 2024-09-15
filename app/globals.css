@@ -50,52 +50,53 @@ html {
         --ring: 328 68% 51%;
         --radius: 15px;
     }
+}
+
+* {
+    font-family: var(--font-nunito), sans-serif;
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background: #fff;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background: #dbdadd;
+    border-radius: 6px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #dbdadd;
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+@layer base {
     * {
-        font-family: var(--font-nunito), sans-serif;
+        @apply border-border;
     }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
 
-    .scrollbar::-webkit-scrollbar {
-        width: 4px;
-    }
+#nprogress .bar {
+    @apply bg-primary !important;
+}
 
-    .scrollbar::-webkit-scrollbar-track {
-        border-radius: 6px;
-        background: #fff;
-    }
+#nprogress .peg {
+    @apply shadow-md shadow-primary !important;
+}
 
-    .scrollbar::-webkit-scrollbar-thumb {
-        background: #dbdadd;
-        border-radius: 6px;
-    }
-
-    .scrollbar::-webkit-scrollbar-thumb:hover {
-        background: #dbdadd;
-    }
-
-    @layer utilities {
-        .text-balance {
-            text-wrap: balance;
-        }
-    }
-
-    @layer base {
-        * {
-            @apply border-border;
-        }
-        body {
-            @apply bg-background text-foreground;
-        }
-    }
-
-    #nprogress .bar {
-        @apply bg-primary !important;
-    }
-
-    #nprogress .peg {
-        @apply shadow-md shadow-primary !important;
-    }
-
-    #nprogress .spinner-icon {
-        @apply border-t-primary border-l-primary !important;
-    }
+#nprogress .spinner-icon {
+    @apply border-t-primary border-l-primary !important;
 }

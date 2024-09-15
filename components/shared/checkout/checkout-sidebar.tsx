@@ -49,10 +49,10 @@ export const CheckoutSidebar: React.FC<Props> = ({
                 <span>{totalAmount + DELIVERY_PRICE + BAG_PRICE}₴</span>
             </div>
             <Button
+                type="submit"
                 variant="salad"
                 // onClick={() => setRedirecting(true)}
-                // loading={redirecting}
-                type="submit"
+                loading={loading}
                 className="w-full h-20 text-lg font-bold rounded-b-md rounded-t-none active:scale-100"
             >
                 Перейти до оформлення

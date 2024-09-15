@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Container } from "./container";
@@ -8,6 +10,8 @@ import { CartButton } from "./cart-button";
 import Link from "next/link";
 import { CategoriesWithRelations } from "@/@types/prisma";
 import { TopBar } from "./top-bar";
+import { useRouter, useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface Props {
     categories?: CategoriesWithRelations[];
@@ -22,6 +26,25 @@ export const Header: React.FC<Props> = ({
     hasCart = true,
     className,
 }) => {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    React.useEffect(() => {
+        let toastMessage = "";
+
+        if (searchParams.has("paid")) {
+            toastMessage =
+                "Замовлення успішно сплачено! Інформація надіслана на пошту.";
+        }
+
+        if (toastMessage) {
+            setTimeout(() => {
+                router.replace("/");
+                toast.success(toastMessage, { duration: 3000 });
+            }, 1000);
+        }
+    }, []);
+
     return (
         <header className={cn("sticky top-0 z-10 bg-white", className)}>
             <div className="border-b border-secondary">
