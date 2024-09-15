@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { FormInput } from "../form/form-input";
 import { Title } from "../title";
 import { FormTextarea } from "../form/form-textarea";
+import { AddressInput } from "../address-input";
 
 interface Props {
     className?: string;
@@ -48,7 +49,7 @@ export const CheckoutPersonalInfoForm: React.FC<Props> = ({ className }) => {
                     className="text-base"
                 />
                 <div className="grid grid-cols-4 gap-4">
-                    <FormInput
+                    <AddressInput
                         required
                         label="Адреса"
                         name="address"
