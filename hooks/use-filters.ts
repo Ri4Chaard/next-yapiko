@@ -30,7 +30,7 @@ export const useFilters = (): ReturnProps => {
 
     // Sort filter
     const [selectedSort, setSelectedSort] = React.useState(
-        searchParams.get("sort") || ""
+        searchParams.get("sort") || "none"
     );
 
     return React.useMemo(

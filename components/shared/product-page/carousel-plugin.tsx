@@ -19,7 +19,7 @@ export const CarouselPlugin: React.FC<Props> = ({ category, className }) => {
             <Carousel loading={loading}>
                 {products.map((product) => (
                     <div
-                        className="flex items-center justify-center rounded-md flex-shrink-0 flex-grow-0 basis-[40%]"
+                        className="flex items-center justify-center mx-5 rounded-md flex-shrink-0 flex-grow-0 basis-[40%]"
                         key={product.name}
                     >
                         <ProductCard product={product} />

@@ -27,9 +27,9 @@ export const ProductCardForm: React.FC<Props> = ({
     loading,
 }) => {
     return (
-        <div className={cn("relative w-[450px]", className)}>
+        <div className={cn("relative w-full", className)}>
             <Link href={`/product/${id}`}>
-                <img src={imageUrl} alt={name} className="rounded-md" />
+                <img src={imageUrl} alt={name} className="rounded-md w-full" />
             </Link>
             <div className="absolute w-full flex items-center justify-between bottom-4 px-4 font-semibold">
                 <Link href={`/product/${id}`}>

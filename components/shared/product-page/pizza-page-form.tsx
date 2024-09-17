@@ -18,7 +18,7 @@ export const PizzaPageForm: React.FC<Props> = ({ product, className }) => {
         <Container className={cn("", className)}>
             <div className="flex gap-8 mt-8">
                 {/* Ліва частина */}
-                <div className="flex-1 ">
+                <div className="flex-1">
                     <img
                         src={product.imageUrl}
                         className="object-cover w-full h-[450px] rounded-md"

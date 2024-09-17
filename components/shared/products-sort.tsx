@@ -21,20 +21,22 @@ export const ProductsSort: React.FC<Props> = ({
     className,
 }) => {
     return (
-        <div className={cn("flex justify-between items-center", className)}>
-            <span>Сортувати за:</span>
-            <Select onValueChange={onChange} defaultValue="none">
-                <SelectTrigger className="rounded-[8px] w-[130px] text-black">
-                    <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectGroup>
-                        <SelectItem value="none">Не сортувати</SelectItem>
-                        <SelectItem value="expensive">Ціна ↓</SelectItem>
-                        <SelectItem value="cheap">Ціна ↑</SelectItem>
-                    </SelectGroup>
-                </SelectContent>
-            </Select>
+        <div className={cn("", className)}>
+            <div className="flex items-center justify-end">
+                <span className="mr-2">Сортувати за:</span>
+                <Select onValueChange={onChange} defaultValue="none">
+                    <SelectTrigger className="rounded-[8px] w-[130px] text-black">
+                        <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            <SelectItem value="none">Не сортувати</SelectItem>
+                            <SelectItem value="expensive">Ціна ↓</SelectItem>
+                            <SelectItem value="cheap">Ціна ↑</SelectItem>
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+            </div>
         </div>
     );
 };

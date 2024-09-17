@@ -65,9 +65,9 @@ export const PizzaCardForm: React.FC<Props> = ({
     };
 
     return (
-        <div className={cn("relative w-[450px]", className)}>
+        <div className={cn("relative w-full", className)}>
             <Link href={`/product/${id}`}>
-                <img src={imageUrl} alt={name} className="rounded-md" />
+                <img src={imageUrl} alt={name} className="rounded-md w-full" />
             </Link>
             <div className="absolute w-full flex items-center justify-between bottom-4 px-4 font-semibold">
                 <div className="flex flex-col w-full">
@@ -79,8 +79,8 @@ export const PizzaCardForm: React.FC<Props> = ({
                         />
                     </Link>
                     {loading ? (
-                        <div className="flex justify-between">
-                            <div className="flex items-center justify-center rounded-[8px] w-[121px] h-10 bg-muted">
+                        <div className="flex ">
+                            <div className="flex items-center justify-center mr-5 rounded-[8px] w-[121px] h-10 bg-muted">
                                 <LoaderCircle className="w-5 h-5 animate-spin" />
                             </div>
                             <div className="flex items-center justify-center w-[169px] h-10 mr-6 rounded-[8px] bg-muted">
@@ -88,8 +88,9 @@ export const PizzaCardForm: React.FC<Props> = ({
                             </div>
                         </div>
                     ) : (
-                        <div className="flex justify-between text-sm">
+                        <div className="flex text-sm">
                             <GroupVariants
+                                className="mr-5"
                                 items={pizzaSizes}
                                 value={String(size)}
                                 onClick={(value) =>

@@ -37,18 +37,15 @@ export const ProductsMenu: React.FC<Props> = ({
                 size="xl"
                 className="mt-3 font-bold"
             />
-            <div className="flex gap-[80px] mt-10">
-                <div className="w-[250px]">
-                    <Filters />
-                </div>
-                <div className="flex-1">
-                    {products && (
-                        <ProductList
-                            subcategory={subcategory || ""}
-                            products={products}
-                        />
-                    )}
-                </div>
+            <div className=" mt-5">
+                <Filters />
+                {products && (
+                    <ProductList
+                        className="mx-5 mt-5"
+                        subcategory={subcategory || ""}
+                        products={products}
+                    />
+                )}
             </div>
         </Container>
     );
