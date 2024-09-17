@@ -21,8 +21,6 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
     useQueryFilters(filters);
 
-    console.log(filters);
-
     const items = ingredients.map((item) => ({
         value: String(item.id),
         text: item.name,

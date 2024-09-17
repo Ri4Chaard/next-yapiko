@@ -12,6 +12,7 @@ import { CategoriesWithRelations } from "@/@types/prisma";
 import { TopBar } from "./top-bar";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
+import { AuthButton } from "./auth/auth-button";
 
 interface Props {
     categories?: CategoriesWithRelations[];
@@ -35,6 +36,9 @@ export const Header: React.FC<Props> = ({
         if (searchParams.has("paid")) {
             toastMessage =
                 "Замовлення успішно сплачено! Інформація надіслана на пошту.";
+        }
+        if (searchParams.has("verified")) {
+            toastMessage = "Пошта успішно підтверджена!";
         }
 
         if (toastMessage) {
@@ -89,10 +93,7 @@ export const Header: React.FC<Props> = ({
                             <b>Доставка та оплата</b>
                         </Button>
 
-                        <Button className="flex items-center gap-2">
-                            <House width={18} />
-                            <b>Увійти</b>
-                        </Button>
+                        <AuthButton />
 
                         {hasCart && <CartButton />}
                     </div>

@@ -5,16 +5,19 @@ import { Input } from "@/components/ui/input";
 import { ErrorText } from "../error-text";
 import { ClearButton } from "../clear-button";
 import { RequiredSymbol } from "../required-symbol";
+import { cn } from "@/lib/utils";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
     name: string;
     label?: string;
     required?: boolean;
     className?: string;
+    inputClassName?: string;
 }
 
 export const FormInput: React.FC<Props> = ({
     className,
+    inputClassName,
     name,
     label,
     required,
@@ -42,7 +45,7 @@ export const FormInput: React.FC<Props> = ({
 
             <div className="relative">
                 <Input
-                    className="h-12 text-md"
+                    className={cn("h-12 text-md", inputClassName)}
                     {...register(name)}
                     {...props}
                 />
