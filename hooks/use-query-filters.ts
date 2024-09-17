@@ -10,6 +10,10 @@ export const useQueryFilters = (filters: Filters) => {
     React.useEffect(() => {
         if (isMounted.current) {
             const params = {
+                sort:
+                    filters.selectedSort !== "none"
+                        ? filters.selectedSort
+                        : undefined,
                 ingredients: Array.from(filters.selectedIngredients),
             };
 

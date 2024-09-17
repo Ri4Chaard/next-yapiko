@@ -19,7 +19,6 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
     const filters = useFilters();
 
-    //TODO: add sort to query
     useQueryFilters(filters);
 
     const items = ingredients.map((item) => ({

@@ -8,6 +8,7 @@ export interface GetParams {
 export interface GetSearchParams {
     query?: string;
     ingredients?: string;
+    sort?: string;
 }
 
 export const findProducts = async (
@@ -15,6 +16,7 @@ export const findProducts = async (
     searchParams: GetSearchParams
 ) => {
     const ingredientsIdArr = searchParams.ingredients?.split(",").map(Number);
+    const selectedSort = searchParams.sort;
 
     const products = await prisma.product.findMany({
         where: {
@@ -28,6 +30,22 @@ export const findProducts = async (
             items: true,
         },
     });
+
+    if (selectedSort === "cheap") {
+        products.sort((a, b) => {
+            const priceA = a.items[0].price;
+            const priceB = b.items[0].price;
+
+            return priceA - priceB;
+        });
+    } else if (selectedSort === "expensive") {
+        products.sort((a, b) => {
+            const priceA = a.items[0].price;
+            const priceB = b.items[0].price;
+
+            return priceB - priceA;
+        });
+    }
 
     return { products };
 };
