@@ -1,9 +1,8 @@
 import React from "react";
-import { cn } from "@/lib/utils";
 import { FormInput } from "../form/form-input";
-import { Title } from "../title";
 import { FormTextarea } from "../form/form-textarea";
 import { AddressInput } from "../address-input";
+import { BordersBlock } from "../borders-block";
 
 interface Props {
     className?: string;
@@ -11,19 +10,8 @@ interface Props {
 
 export const CheckoutPersonalInfoForm: React.FC<Props> = ({ className }) => {
     return (
-        <div
-            className={cn(
-                "bg-white rounded-md border border-secondary w-full",
-                className
-            )}
-        >
-            <div className="flex items-center p-5 border-b border-b-secondary">
-                <Title
-                    text="Контактна інформація"
-                    className="font-extrabold text-2xl"
-                />
-            </div>
-            <div className="grid grid-cols-2 gap-5 p-5">
+        <BordersBlock title="Контактна інформація" className={className}>
+            <div className="grid grid-cols-2 gap-5">
                 <FormInput
                     required
                     label="Ім'я"
@@ -83,6 +71,6 @@ export const CheckoutPersonalInfoForm: React.FC<Props> = ({ className }) => {
                     className="text-base"
                 />
             </div>
-        </div>
+        </BordersBlock>
     );
 };

@@ -8,6 +8,7 @@ import { Title } from "../title";
 import { CheckoutItem } from "./checkout-item";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CheckoutItemSkeleton } from "./checkout-item-skeleton";
+import { BordersBlock } from "../borders-block";
 
 interface Props {
     items: CartStateItem[];
@@ -29,49 +30,42 @@ export const CheckoutCart: React.FC<Props> = ({
     className,
 }) => {
     return (
-        <div
-            className={cn(
-                "bg-white rounded-md border border-secondary w-full",
-                className
-            )}
+        <BordersBlock
+            title="Ваш кошик"
+            endAdornment={
+                <>
+                    <ShoppingBasket width={30} height={30} strokeWidth={2} />
+                    <span className=" mx-3">|</span>
+                    <span className="font-bold mr-6 text-2xl">{3}</span>
+                </>
+            }
+            className={className}
         >
-            <div className="flex items-center p-5 border-b border-b-secondary">
-                <ShoppingBasket width={30} height={30} strokeWidth={2} />
-                <span className=" mx-3">|</span>
-                <span className="font-bold mr-6 text-2xl">{3}</span>
-                <Title text="Ваш кошик" className="font-extrabold text-2xl" />
-            </div>
-            <div className="p-5">
-                {loading
-                    ? [...Array(3)].map((_, index) => (
-                          <CheckoutItemSkeleton key={index} />
-                      ))
-                    : items.map((item) => (
-                          <CheckoutItem
-                              key={item.id}
-                              id={item.id}
-                              name={item.name}
-                              description={item.description}
-                              details={getCartItemDetails(
-                                  item.ingredients,
-                                  item.pizzaBorder as PizzaBorder,
-                                  item.pizzaSize as PizzaSize
-                              )}
-                              price={item.price}
-                              imageUrl={item.imageUrl}
-                              quantity={item.quantity}
-                              onClickCountButton={(type) =>
-                                  onClickCountButton(
-                                      item.id,
-                                      item.quantity,
-                                      type
-                                  )
-                              }
-                              onClickRemove={() => removeCartItem(item.id)}
-                              disabled={item.disabled}
-                          />
-                      ))}
-            </div>
-        </div>
+            {loading
+                ? [...Array(3)].map((_, index) => (
+                      <CheckoutItemSkeleton key={index} />
+                  ))
+                : items.map((item) => (
+                      <CheckoutItem
+                          key={item.id}
+                          id={item.id}
+                          name={item.name}
+                          description={item.description}
+                          details={getCartItemDetails(
+                              item.ingredients,
+                              item.pizzaBorder as PizzaBorder,
+                              item.pizzaSize as PizzaSize
+                          )}
+                          price={item.price}
+                          imageUrl={item.imageUrl}
+                          quantity={item.quantity}
+                          onClickCountButton={(type) =>
+                              onClickCountButton(item.id, item.quantity, type)
+                          }
+                          onClickRemove={() => removeCartItem(item.id)}
+                          disabled={item.disabled}
+                      />
+                  ))}
+        </BordersBlock>
     );
 };

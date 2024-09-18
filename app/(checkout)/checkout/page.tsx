@@ -15,11 +15,14 @@ import {
 import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
 import React from "react";
+import { Api } from "@/services/api-client";
+import { useSession } from "next-auth/react";
 
 export default function CheckoutPage() {
     const [submitting, setSubmitting] = React.useState(false);
     const { totalAmount, updateItemQuantity, items, removeCartItem, loading } =
         useCart();
+    const { data: session } = useSession();
 
     const onClickCountButton = (
         id: number,
@@ -45,6 +48,21 @@ export default function CheckoutPage() {
             comment: "",
         },
     });
+
+    React.useEffect(() => {
+        async function fetchUserInfo() {
+            const data = await Api.auth.getMe();
+            const [firstName, lastName] = data.fullName.split(" ");
+
+            form.setValue("firstName", firstName);
+            form.setValue("lastName", lastName);
+            form.setValue("email", data.email);
+        }
+
+        if (session) {
+            fetchUserInfo();
+        }
+    }, []);
 
     const onSubmit = async (data: CheckoutFormValues) => {
         try {
@@ -83,7 +101,13 @@ export default function CheckoutPage() {
                                 removeCartItem={removeCartItem}
                                 loading={loading}
                             />
-                            <CheckoutPersonalInfoForm />
+                            <CheckoutPersonalInfoForm
+                                className={
+                                    loading
+                                        ? "opacity-70 pointer-events-none"
+                                        : ""
+                                }
+                            />
                         </div>
 
                         {/* Права частина */}

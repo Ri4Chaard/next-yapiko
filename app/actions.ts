@@ -155,9 +155,9 @@ export async function registerUser(body: Prisma.UserCreateInput) {
 
         if (user) {
             if (!user.verified) {
-                throw new Error("Пошта не підтверджена");
+                return new Error("Пошта не підтверджена");
             }
-            throw new Error("Користувач вже існує");
+            return new Error("Користувач вже існує");
         }
 
         const createdUser = await prisma.user.create({

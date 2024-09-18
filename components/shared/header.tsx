@@ -18,6 +18,7 @@ interface Props {
     categories?: CategoriesWithRelations[];
     hasTopbar?: boolean;
     hasCart?: boolean;
+    hasAuth?: boolean;
     className?: string;
 }
 
@@ -25,6 +26,7 @@ export const Header: React.FC<Props> = ({
     categories,
     hasTopbar = true,
     hasCart = true,
+    hasAuth = true,
     className,
 }) => {
     const router = useRouter();
@@ -93,7 +95,7 @@ export const Header: React.FC<Props> = ({
                             <b>Доставка та оплата</b>
                         </Button>
 
-                        <AuthButton />
+                        {hasAuth && <AuthButton />}
 
                         {hasCart && <CartButton />}
                     </div>

@@ -1,9 +1,10 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "../../ui/button";
-import { CircleUser, House } from "lucide-react";
+import { House, User } from "lucide-react";
 import { AuthDrawer } from "./auth-drawer";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 interface Props {
     className?: string;
@@ -15,13 +16,15 @@ export const AuthButton: React.FC<Props> = ({ className }) => {
 
     if (session) {
         return (
-            <Button
-                variant="outline"
-                className={cn("flex items-center gap-2", className)}
-            >
-                <CircleUser size={18} />
-                Профіль
-            </Button>
+            <Link href="/profile">
+                <Button
+                    variant="outline"
+                    className={cn("flex items-center gap-2", className)}
+                >
+                    <User size={18} />
+                    Профіль
+                </Button>
+            </Link>
         );
     }
     return (
