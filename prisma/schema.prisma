@@ -203,7 +203,7 @@ model VerificationCode{
 enum OrderStatus{
     PENDING
     SUCCEEDED
-    CANCELLED
+    CANCELED
 }
 
 enum UserRole{

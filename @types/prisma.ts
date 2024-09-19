@@ -18,3 +18,13 @@ export type CategoriesWithRelations = Category & {
     ingredients?: Ingredient[];
     products?: ProductWithRelations[];
 };
+
+export type OrderProductItem = ProductItem & {
+    product: Product;
+};
+
+export type OrderProducts = {
+    productItem: OrderProductItem;
+    extraIngredients?: ExtraIngredient[];
+    quantity: number;
+};

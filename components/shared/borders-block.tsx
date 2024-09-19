@@ -6,6 +6,7 @@ interface Props extends React.PropsWithChildren {
     title: string;
     endAdornment?: React.ReactNode;
     className?: string;
+    bodyClassName?: string;
 }
 
 export const BordersBlock: React.FC<Props> = ({
@@ -13,6 +14,7 @@ export const BordersBlock: React.FC<Props> = ({
     title,
     endAdornment,
     className,
+    bodyClassName,
 }) => {
     return (
         <div
@@ -25,7 +27,7 @@ export const BordersBlock: React.FC<Props> = ({
                 {endAdornment}
                 <Title text={title} className="font-extrabold text-2xl" />
             </div>
-            <div className="p-5">{children}</div>
+            <div className={cn("p-5", bodyClassName)}>{children}</div>
         </div>
     );
 };

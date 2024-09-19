@@ -12,7 +12,6 @@ interface Props {
 
 export const AuthButton: React.FC<Props> = ({ className }) => {
     const { data: session } = useSession();
-    console.log(session);
 
     if (session) {
         return (

@@ -22,7 +22,7 @@ export const ProfileSidebar: React.FC<Props> = ({ className }) => {
     return (
         <div
             className={cn(
-                "flex flex-col justify-center items-center gap-5 py-5 border border-secondary rounded-md font-semibold",
+                "sticky top-28 flex flex-col justify-center items-center gap-5 py-5 h-full border border-secondary rounded-md font-semibold",
                 className
             )}
         >
