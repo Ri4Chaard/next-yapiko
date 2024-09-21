@@ -1,11 +1,15 @@
+"use client";
+
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Banknote, Package, ShoppingBag } from "lucide-react";
+import { Banknote, Coins, Package, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { FormCheckbox } from "../form/form-checkbox";
 
 interface Props {
     totalAmount: number;
+    bonusPoints: number;
     loading?: boolean;
     className?: string;
 }
@@ -15,9 +19,14 @@ const BAG_PRICE = 3;
 
 export const CheckoutSidebar: React.FC<Props> = ({
     totalAmount,
+    bonusPoints,
     loading,
     className,
 }) => {
+    const [isChecked, setIsChecked] = React.useState(false);
+
+    const totalPrice = totalAmount + DELIVERY_PRICE + BAG_PRICE;
+
     return (
         <div
             className={cn(
@@ -75,12 +84,29 @@ export const CheckoutSidebar: React.FC<Props> = ({
                 </div>
             </div>
             <div className="flex justify-between items-center font-bold text-xl my-2 px-3">
-                <p>Сума замовлення </p>
+                <p>Сума замовлення</p>
                 {loading ? (
                     <Skeleton className="w-[50px] h-[28px]" />
+                ) : isChecked ? (
+                    <span>{totalPrice - bonusPoints}₴</span>
                 ) : (
-                    <span>{totalAmount + DELIVERY_PRICE + BAG_PRICE}₴</span>
+                    <span>{totalPrice}₴</span>
                 )}
+            </div>
+            <div className="flex justify-between items-center px-3">
+                <div className="flex items-center font-semibold">
+                    <span className="mr-2">Мої бонуси:</span>
+                    <span className="text-primary text-lg">{bonusPoints}</span>
+                    <Coins className="text-primary" width={18} />
+                </div>
+
+                <FormCheckbox
+                    label="Списати бонуси"
+                    name="isBonus"
+                    className="text-base"
+                    defaultChecked={isChecked}
+                    onChange={() => setIsChecked(!isChecked)}
+                />
             </div>
             <Button
                 type="submit"

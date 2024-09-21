@@ -49,9 +49,34 @@ export async function createOrder(data: CheckoutFormValues) {
             throw new Error("Cart is empty");
         }
 
+        //Шукаємо юзера для списання бонусів
+        //TODO: Списувати бонуси після успішної оплати
+        const currentUser = await getUserSession();
+
+        if (data.isBonus && currentUser) {
+            const totalAmountWithBonuses =
+                currentUser?.bonusPoints > userCart.totalAmount
+                    ? 0
+                    : userCart.totalAmount - currentUser.bonusPoints;
+            await prisma.user.update({
+                where: {
+                    id: Number(currentUser.id),
+                },
+                data: {
+                    bonusPoints:
+                        totalAmountWithBonuses === 0
+                            ? currentUser.bonusPoints - userCart.totalAmount
+                            : 0,
+                },
+            });
+        }
+
+        console.log(currentUser?.id);
+
         //Створюємо замовлення
         const order = await prisma.order.create({
             data: {
+                userId: Number(currentUser?.id),
                 token: cartToken,
                 fullName: data.firstName + " " + data.lastName,
                 email: data.email,

@@ -20,6 +20,7 @@ import { useSession } from "next-auth/react";
 
 export default function CheckoutPage() {
     const [submitting, setSubmitting] = React.useState(false);
+    const [bonusPoints, setBonusPoints] = React.useState(0);
     const { totalAmount, updateItemQuantity, items, removeCartItem, loading } =
         useCart();
     const { data: session } = useSession();
@@ -46,6 +47,7 @@ export default function CheckoutPage() {
             floor: "",
             apartment: "",
             comment: "",
+            isBonus: false,
         },
     });
 
@@ -57,6 +59,8 @@ export default function CheckoutPage() {
             form.setValue("firstName", firstName);
             form.setValue("lastName", lastName);
             form.setValue("email", data.email);
+
+            setBonusPoints(data.bonusPoints);
         }
 
         if (session) {
@@ -68,14 +72,12 @@ export default function CheckoutPage() {
         try {
             setSubmitting(true);
             const paymentUrl = await createOrder(data);
-
             toast.success(
                 "Замовлення успішно оформлене! 📝 Перехід на оплату...",
                 {
                     icon: "✔️",
                 }
             );
-
             if (paymentUrl) {
                 window.location.href = paymentUrl;
             }
@@ -114,6 +116,7 @@ export default function CheckoutPage() {
                         <CheckoutSidebar
                             totalAmount={totalAmount}
                             loading={loading || submitting}
+                            bonusPoints={bonusPoints}
                         />
                     </div>
                 </form>

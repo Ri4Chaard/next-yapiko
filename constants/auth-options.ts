@@ -66,6 +66,7 @@ export const authOptions: AuthOptions = {
 
                     email: findUser.email,
                     name: findUser.fullName,
+                    bonusPoints: findUser.bonusPoints,
                     role: findUser.role,
                 };
             },

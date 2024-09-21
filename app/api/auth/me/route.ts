@@ -22,6 +22,7 @@ export async function GET(req: any, res: any) {
             select: {
                 fullName: true,
                 email: true,
+                bonusPoints: true,
                 password: false,
             },
         });

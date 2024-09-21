@@ -58,10 +58,25 @@ export async function POST(req: NextRequest) {
             data: {
                 status: isSucceeded
                     ? OrderStatus.SUCCEEDED
-                    : OrderStatus.CANCELLED,
+                    : OrderStatus.CANCELED,
                 paymentId: String(paymentData.payment_id),
             },
         });
+
+        console.log(isSucceeded, order.userId, order.totalAmount);
+
+        if (isSucceeded && order.userId) {
+            await prisma.user.update({
+                where: {
+                    id: order.userId,
+                },
+                data: {
+                    bonusPoints: {
+                        increment: order.totalAmount * 0.05,
+                    },
+                },
+            });
+        }
 
         const items = JSON.parse(order?.items as string) as CartItemDTO[];
         if (isSucceeded) {

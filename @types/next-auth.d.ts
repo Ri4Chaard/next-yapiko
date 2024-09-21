@@ -11,6 +11,7 @@ declare module "next-auth" {
             role: UserRole;
             name: string;
             email: string;
+            bonusPoints: number;
             image: string;
         };
     }

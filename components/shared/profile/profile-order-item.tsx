@@ -42,7 +42,10 @@ export const ProfileOrderItem: React.FC<Props> = ({ order, className }) => {
             </CollapsibleTrigger>
             <CollapsibleContent>
                 {JSON.parse(String(order.items)).map((item: OrderProducts) => (
-                    <div className="flex justify-between items-center gap-3 w-full px-5 my-3">
+                    <div
+                        key={order.id}
+                        className="flex justify-between items-center gap-3 w-full px-5 my-3"
+                    >
                         <img
                             className="rounded-sm w-24 h-14 object-cover"
                             src={item.productItem.product.imageUrl}

@@ -15,6 +15,7 @@ export const checkoutFormSchema = z.object({
     apartment: z.string().optional(),
     floor: z.string().optional(),
     comment: z.string().optional(),
+    isBonus: z.boolean().optional(),
 });
 
 export type CheckoutFormValues = z.infer<typeof checkoutFormSchema>;
