@@ -5,12 +5,16 @@ interface Props {
     orderId: number;
     items: CartItemDTO[];
     totalAmount: number;
+    userId?: number;
+    userBonuses?: number;
 }
 
 export const OrderSuccessTemplate: React.FC<Props> = ({
     orderId,
     items,
     totalAmount,
+    userId,
+    userBonuses,
 }) => {
     return (
         <div
@@ -83,6 +87,48 @@ export const OrderSuccessTemplate: React.FC<Props> = ({
                     </li>
                 ))}
             </ul>
+
+            {userId && (
+                <>
+                    <hr />
+
+                    <p
+                        style={{
+                            fontSize: "18px",
+                            color: "#34495e",
+                        }}
+                    >
+                        Вам успішно нараховано{" "}
+                        <b style={{ fontWeight: 600, color: "#e74c3c" }}>
+                            {Math.floor(totalAmount * 0.05)}
+                        </b>{" "}
+                        бонусів
+                    </p>
+
+                    {userBonuses && (
+                        <>
+                            <hr />
+                            <p
+                                style={{
+                                    fontSize: "18px",
+                                    color: "#34495e",
+                                }}
+                            >
+                                Було знято{" "}
+                                <b
+                                    style={{
+                                        fontWeight: 600,
+                                        color: "#e74c3c",
+                                    }}
+                                >
+                                    {userBonuses}
+                                </b>{" "}
+                                бонусів
+                            </p>
+                        </>
+                    )}
+                </>
+            )}
         </div>
     );
 };

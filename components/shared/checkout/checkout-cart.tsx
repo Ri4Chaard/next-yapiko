@@ -36,7 +36,9 @@ export const CheckoutCart: React.FC<Props> = ({
                 <>
                     <ShoppingBasket width={30} height={30} strokeWidth={2} />
                     <span className=" mx-3">|</span>
-                    <span className="font-bold mr-6 text-2xl">{3}</span>
+                    <span className="font-bold mr-6 text-2xl">
+                        {items.length}
+                    </span>
                 </>
             }
             className={className}

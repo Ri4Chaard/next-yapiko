@@ -183,6 +183,7 @@ model Order{
     phone           String
     address         String
     comment         String?
+    userBonuses     Int?
 
     createdAt       DateTime    @default(now())
     updatedAt       DateTime    @updatedAt

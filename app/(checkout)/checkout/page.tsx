@@ -47,7 +47,7 @@ export default function CheckoutPage() {
             floor: "",
             apartment: "",
             comment: "",
-            isBonus: false,
+            bonuses: "",
         },
     });
 
@@ -69,6 +69,8 @@ export default function CheckoutPage() {
     }, []);
 
     const onSubmit = async (data: CheckoutFormValues) => {
+        console.log(data);
+
         try {
             setSubmitting(true);
             const paymentUrl = await createOrder(data);

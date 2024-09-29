@@ -53,6 +53,57 @@ export async function POST(req: NextRequest) {
 
         const isSucceeded = paymentData.status === "success";
 
+        const currentUser = await prisma.user.findFirst({
+            where: {
+                id: order.userId || undefined,
+            },
+        });
+
+        //Списуємо бонуси, якщо юзер обрав їх списання
+        if (order.userBonuses && currentUser && isSucceeded) {
+            //Відміняємо замовлення, якщо бонусів недостатньо
+            if (order.userBonuses > currentUser.bonusPoints) {
+                await prisma.order.update({
+                    where: { id: order.id },
+                    data: {
+                        status: OrderStatus.CANCELED,
+                    },
+                });
+
+                return NextResponse.json({ error: "Not enough bonuses" });
+            }
+
+            const totalAmountWithBonuses =
+                order.userBonuses > order.totalAmount
+                    ? 0
+                    : order.totalAmount - order.userBonuses;
+            await prisma.user.update({
+                where: {
+                    id: Number(currentUser.id),
+                },
+                data: {
+                    bonusPoints:
+                        totalAmountWithBonuses === 0
+                            ? order.userBonuses - order.totalAmount
+                            : 0,
+                },
+            });
+        }
+
+        //Нараховуємо бонуси
+        if (isSucceeded && order.userId) {
+            await prisma.user.update({
+                where: {
+                    id: order.userId,
+                },
+                data: {
+                    bonusPoints: {
+                        increment: Math.floor(order.totalAmount * 0.05),
+                    },
+                },
+            });
+        }
+
         await prisma.order.update({
             where: { id: order.id },
             data: {
@@ -63,21 +114,6 @@ export async function POST(req: NextRequest) {
             },
         });
 
-        console.log(isSucceeded, order.userId, order.totalAmount);
-
-        if (isSucceeded && order.userId) {
-            await prisma.user.update({
-                where: {
-                    id: order.userId,
-                },
-                data: {
-                    bonusPoints: {
-                        increment: order.totalAmount * 0.05,
-                    },
-                },
-            });
-        }
-
         const items = JSON.parse(order?.items as string) as CartItemDTO[];
         if (isSucceeded) {
             await sendEmail(
@@ -87,6 +123,8 @@ export async function POST(req: NextRequest) {
                     orderId: order.id,
                     items,
                     totalAmount: order.totalAmount,
+                    userId: order.userId || undefined,
+                    userBonuses: order.userBonuses || undefined,
                 })
             );
         }

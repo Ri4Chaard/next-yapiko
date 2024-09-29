@@ -25,7 +25,9 @@ export const CheckoutSidebar: React.FC<Props> = ({
 }) => {
     const [isChecked, setIsChecked] = React.useState(false);
 
-    const totalPrice = totalAmount + DELIVERY_PRICE + BAG_PRICE;
+    const totalPrice = isChecked
+        ? totalAmount + DELIVERY_PRICE + BAG_PRICE - bonusPoints
+        : totalAmount + DELIVERY_PRICE + BAG_PRICE;
 
     return (
         <div
@@ -50,7 +52,13 @@ export const CheckoutSidebar: React.FC<Props> = ({
                             <p className="flex-1 text-sm">
                                 Проміжний підсумок кошика
                             </p>
-                            <span>{totalAmount}₴</span>
+                            {isChecked ? (
+                                <span className="text-primary">
+                                    {totalAmount - bonusPoints}₴
+                                </span>
+                            ) : (
+                                <span>{totalAmount}₴</span>
+                            )}
                         </>
                     )}
                 </div>
@@ -87,8 +95,6 @@ export const CheckoutSidebar: React.FC<Props> = ({
                 <p>Сума замовлення</p>
                 {loading ? (
                     <Skeleton className="w-[50px] h-[28px]" />
-                ) : isChecked ? (
-                    <span>{totalPrice - bonusPoints}₴</span>
                 ) : (
                     <span>{totalPrice}₴</span>
                 )}
@@ -102,10 +108,13 @@ export const CheckoutSidebar: React.FC<Props> = ({
 
                 <FormCheckbox
                     label="Списати бонуси"
-                    name="isBonus"
+                    name="bonuses"
                     className="text-base"
+                    value={String(bonusPoints)}
                     defaultChecked={isChecked}
-                    onChange={() => setIsChecked(!isChecked)}
+                    onChange={(e) => {
+                        setIsChecked(!isChecked);
+                    }}
                 />
             </div>
             <Button
