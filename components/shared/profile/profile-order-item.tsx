@@ -41,26 +41,28 @@ export const ProfileOrderItem: React.FC<Props> = ({ order, className }) => {
                 </p>
             </CollapsibleTrigger>
             <CollapsibleContent>
-                {JSON.parse(String(order.items)).map((item: OrderProducts) => (
-                    <div
-                        key={order.id}
-                        className="flex justify-between items-center gap-3 w-full px-5 my-3"
-                    >
-                        <img
-                            className="rounded-sm w-24 h-14 object-cover"
-                            src={item.productItem.product.imageUrl}
-                            alt={item.productItem.product.name}
-                        />
-                        <span className="flex-1">
-                            {item.productItem.product.name}
-                        </span>
-                        <p>
-                            {item.productItem.price}₴/
-                            {item.productItem.description}
-                        </p>
-                        <span>x {item.quantity}</span>
-                    </div>
-                ))}
+                {JSON.parse(String(order.items)).map(
+                    (item: OrderProducts, index: number) => (
+                        <div
+                            key={index}
+                            className="flex justify-between items-center gap-3 w-full px-5 my-3"
+                        >
+                            <img
+                                className="rounded-sm w-24 h-14 object-cover"
+                                src={item.productItem.product.imageUrl}
+                                alt={item.productItem.product.name}
+                            />
+                            <span className="flex-1">
+                                {item.productItem.product.name}
+                            </span>
+                            <p>
+                                {item.productItem.price}₴/
+                                {item.productItem.description}
+                            </p>
+                            <span>x {item.quantity}</span>
+                        </div>
+                    )
+                )}
             </CollapsibleContent>
         </Collapsible>
     );

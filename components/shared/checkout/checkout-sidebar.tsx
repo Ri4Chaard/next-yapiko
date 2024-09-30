@@ -2,7 +2,7 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Banknote, Coins, Package, ShoppingBag } from "lucide-react";
+import { Banknote, Coins, Loader2, Package, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FormCheckbox } from "../form/form-checkbox";
@@ -102,7 +102,13 @@ export const CheckoutSidebar: React.FC<Props> = ({
             <div className="flex justify-between items-center px-3">
                 <div className="flex items-center font-semibold">
                     <span className="mr-2">Мої бонуси:</span>
-                    <span className="text-primary text-lg">{bonusPoints}</span>
+                    {loading ? (
+                        <Skeleton className="w-[32px] h-[28px]" />
+                    ) : (
+                        <span className="text-primary text-lg">
+                            {bonusPoints}
+                        </span>
+                    )}
                     <Coins className="text-primary" width={18} />
                 </div>
 

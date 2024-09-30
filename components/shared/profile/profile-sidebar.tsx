@@ -4,6 +4,8 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { signOut } from "next-auth/react";
 
 interface Props {
     className?: string;
@@ -14,10 +16,15 @@ export const ProfileSidebar: React.FC<Props> = ({ className }) => {
     const links = [
         { path: "/profile", name: "Мій кабінет" },
         { path: "/profile/bonuses", name: "Бонусний рахунок" },
-        { path: "/profile/addresses", name: "Адреси" },
         { path: "/profile/my-data", name: "Мої дані" },
         { path: "/profile/orders", name: "Замовлення" },
     ];
+
+    const onClickSignOut = () => {
+        signOut({
+            callbackUrl: "/",
+        });
+    };
 
     return (
         <div
@@ -37,6 +44,9 @@ export const ProfileSidebar: React.FC<Props> = ({ className }) => {
                     <h1>{link.name}</h1>
                 </Link>
             ))}
+            <Button onClick={onClickSignOut} className="w-3/4">
+                Вийти
+            </Button>
         </div>
     );
 };

@@ -15,15 +15,13 @@ import {
 import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
 import React from "react";
-import { Api } from "@/services/api-client";
-import { useSession } from "next-auth/react";
+import { useUserInfo } from "@/hooks/use-user-info";
 
 export default function CheckoutPage() {
     const [submitting, setSubmitting] = React.useState(false);
     const [bonusPoints, setBonusPoints] = React.useState(0);
     const { totalAmount, updateItemQuantity, items, removeCartItem, loading } =
         useCart();
-    const { data: session } = useSession();
 
     const onClickCountButton = (
         id: number,
@@ -51,22 +49,19 @@ export default function CheckoutPage() {
         },
     });
 
+    const { user, loading: loadingUser } = useUserInfo();
+
     React.useEffect(() => {
-        async function fetchUserInfo() {
-            const data = await Api.auth.getMe();
-            const [firstName, lastName] = data.fullName.split(" ");
+        if (user) {
+            const [firstName, lastName] = user.fullName.split(" ");
 
             form.setValue("firstName", firstName);
             form.setValue("lastName", lastName);
-            form.setValue("email", data.email);
+            form.setValue("email", user.email);
 
-            setBonusPoints(data.bonusPoints);
+            setBonusPoints(user.bonusPoints);
         }
-
-        if (session) {
-            fetchUserInfo();
-        }
-    }, []);
+    }, [user]);
 
     const onSubmit = async (data: CheckoutFormValues) => {
         console.log(data);
@@ -105,9 +100,10 @@ export default function CheckoutPage() {
                                 removeCartItem={removeCartItem}
                                 loading={loading}
                             />
+
                             <CheckoutPersonalInfoForm
                                 className={
-                                    loading
+                                    loading || loadingUser
                                         ? "opacity-70 pointer-events-none"
                                         : ""
                                 }
@@ -117,7 +113,7 @@ export default function CheckoutPage() {
                         {/* Права частина */}
                         <CheckoutSidebar
                             totalAmount={totalAmount}
-                            loading={loading || submitting}
+                            loading={loading || submitting || loadingUser}
                             bonusPoints={bonusPoints}
                         />
                     </div>

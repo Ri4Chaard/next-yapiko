@@ -1,14 +1,30 @@
+import { getUserSession } from "@/lib/get-user-session";
 import { prisma } from "@/prisma/prisma-client";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-    const userEmail = req.nextUrl.searchParams.get("email");
+export async function GET() {
+    try {
+        const user = await getUserSession();
 
-    const data = await prisma.order.findMany({
-        where: {
-            email: userEmail ? userEmail : undefined,
-        },
-    });
+        if (!user) {
+            return NextResponse.json(
+                { message: "Ви не авторизовані" },
+                { status: 401 }
+            );
+        } else {
+            const data = await prisma.order.findMany({
+                where: {
+                    email: user.email,
+                },
+            });
 
-    return NextResponse.json(data);
+            return NextResponse.json(data);
+        }
+    } catch (err) {
+        console.log(err);
+        return NextResponse.json(
+            { message: "[ORDERS_GET] Server error" },
+            { status: 500 }
+        );
+    }
 }

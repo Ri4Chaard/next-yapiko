@@ -1,25 +1,25 @@
 import { Api } from "@/services/api-client";
-import { Order } from "@prisma/client";
+import { User } from "@prisma/client";
 import React from "react";
 
-export const useOrders = () => {
+export const useUserInfo = () => {
     const [loading, setLoading] = React.useState(true);
-    const [orders, setOrders] = React.useState<Order[]>([]);
+    const [user, setUser] = React.useState<User>();
 
     React.useEffect(() => {
-        async function fetchOrdersInfo() {
+        async function fetchUserInfo() {
             try {
                 setLoading(true);
-                const orders = await Api.orders.getOrdersByEmail();
-                setOrders(orders);
+                const user = await Api.auth.getMe();
+                setUser(user);
             } catch (e) {
                 console.log(e);
             } finally {
                 setLoading(false);
             }
         }
-        fetchOrdersInfo();
+        fetchUserInfo();
     }, []);
 
-    return { orders, loading };
+    return { user, loading };
 };
