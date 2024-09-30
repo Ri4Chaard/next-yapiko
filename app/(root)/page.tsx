@@ -14,16 +14,16 @@ export default async function Home() {
     ];
     return (
         <>
-            <div className="mt-10">
+            <div className="mt-4 sm:mt-10">
                 <Container>
                     <Carousel>
                         {slides.map((slide, index) => (
                             <div
-                                className="flex items-center justify-center rounded-md flex-shrink-0 flex-grow-0 basis-[80%]"
+                                className="flex items-center justify-center rounded-md flex-shrink-0 flex-grow-0 basis-full sm:basis-[80%]"
                                 key={index}
                             >
                                 <img
-                                    className="rounded-md border-[14px] border-secondary w-[90%]"
+                                    className="rounded-md border-[8px] sm:border-[14px] border-secondary w-full sm:w-[90%]"
                                     src={slide}
                                     key={index}
                                 />
@@ -33,7 +33,7 @@ export default async function Home() {
                 </Container>
             </div>
 
-            <div className="my-10">
+            <div className="my-6 sm:my-10">
                 <PopularCategories />
             </div>
         </>

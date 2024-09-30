@@ -24,9 +24,13 @@ export const CategoryCard: React.FC<Props> = ({
                 src={image}
                 alt="category image"
             />
-            <div className="absolute bottom-4 left-6">
-                <h2 className="text-white font-bold text-3xl">{name}</h2>
-                <p className="text-white/50 text-xl">від {price}₴</p>
+            <div className="absolute bottom-2 sm:bottom-4 left-3 sm:left-6">
+                <h2 className="text-white font-bold text-xl sm:text-2xl md:text-3xl">
+                    {name}
+                </h2>
+                <p className="text-white/50 text-base sm:text-lg md:text-xl">
+                    від {price}₴
+                </p>
             </div>
         </Link>
     );

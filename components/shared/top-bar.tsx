@@ -19,9 +19,9 @@ export const TopBar: React.FC<Props> = ({ categories, className }) => {
                 className
             )}
         >
-            <Container className="flex items-center justify-between bg-primary rounded-full">
+            <Container className="flex items-center justify-between rounded-full px-0">
                 <Categories categories={categories} />
-
+                <div className="flex-1 bg-primary h-[48px]"></div>
                 <SearchBar />
             </Container>
         </div>

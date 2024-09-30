@@ -15,10 +15,13 @@ export const AuthButton: React.FC<Props> = ({ className }) => {
 
     if (session) {
         return (
-            <Link href="/profile">
+            <Link
+                href="/profile"
+                className={cn("flex items-center gap-2", className)}
+            >
                 <Button
                     variant="outline"
-                    className={cn("flex items-center gap-2", className)}
+                    className="flex w-full items-center gap-2"
                 >
                     <User size={18} />
                     Профіль

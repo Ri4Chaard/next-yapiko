@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { Coins, House, Package, Utensils } from "lucide-react";
+import { Coins, Package, Utensils } from "lucide-react";
 import { CartButton } from "./cart-button";
 import Link from "next/link";
 import { CategoriesWithRelations } from "@/@types/prisma";
@@ -13,6 +13,8 @@ import { TopBar } from "./top-bar";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { AuthButton } from "./auth/auth-button";
+
+import { HeaderBurger } from "./header-burger";
 
 interface Props {
     categories?: CategoriesWithRelations[];
@@ -55,6 +57,13 @@ export const Header: React.FC<Props> = ({
         <header className={cn("sticky top-0 z-10 bg-white", className)}>
             <div className="border-b border-secondary">
                 <Container className="flex items-center justify-between py-3">
+                    {categories && (
+                        <HeaderBurger
+                            categories={categories}
+                            hasAuth={hasAuth}
+                        />
+                    )}
+
                     <Link href="/">
                         <div className="flex items-center gap-2">
                             <Image
@@ -64,7 +73,7 @@ export const Header: React.FC<Props> = ({
                                 height={50}
                                 className="pb-2"
                             />
-                            <h1 className="text-2xl uppercase font-black text-primary">
+                            <h1 className="text-lg sm:text-2xl uppercase font-black text-primary">
                                 Next-Yapiko
                             </h1>
                         </div>
@@ -72,7 +81,7 @@ export const Header: React.FC<Props> = ({
 
                     <div className="flex items-center gap-3">
                         <Button
-                            className="flex items-center gap-2"
+                            className="md:flex hidden items-center gap-2 "
                             variant="salad"
                         >
                             <Utensils width={18} />
@@ -80,7 +89,7 @@ export const Header: React.FC<Props> = ({
                         </Button>
 
                         <Button
-                            className="flex items-center gap-2"
+                            className="md:flex hidden items-center gap-2 "
                             variant="salad"
                         >
                             <Coins width={18} />
@@ -88,20 +97,22 @@ export const Header: React.FC<Props> = ({
                         </Button>
 
                         <Button
-                            className="flex items-center gap-2"
+                            className="md:flex hidden items-center gap-2 "
                             variant="salad"
                         >
                             <Package width={18} />
                             <b>Доставка та оплата</b>
                         </Button>
 
-                        {hasAuth && <AuthButton />}
+                        {hasAuth && <AuthButton className="hidden md:flex" />}
 
                         {hasCart && <CartButton />}
                     </div>
                 </Container>
             </div>
-            {hasTopbar && categories && <TopBar categories={categories} />}
+            {hasTopbar && categories && (
+                <TopBar categories={categories} className="hidden md:block" />
+            )}
         </header>
     );
 };
